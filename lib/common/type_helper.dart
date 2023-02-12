@@ -1,0 +1,1 @@
+enum TypeHelper { Movies, TvSeries }

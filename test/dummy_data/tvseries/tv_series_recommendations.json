@@ -1,0 +1,28 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/8Xs20y8gFR0W9u8Yy9NKdpZtSu7.jpg",
+            "id": 1,
+            "name": "All of Us Are Dead",
+            "original_language": "ko",
+            "original_name": "test",
+            "overview": "overview",
+            "poster_path": "/6zUUtzj7aJzOdoxhpiGzEKYtj1o.jpg",
+            "media_type": "tv",
+            "genre_ids": [
+                1,2,3
+            ],
+            "popularity": 1,
+            "first_air_date": "2022-01-28",
+            "vote_average": 1,
+            "vote_count": 1,
+            "origin_country": [
+                "KR"
+            ]
+        }
+    ],
+    "total_pages": 2,
+    "total_results": 40
+}
