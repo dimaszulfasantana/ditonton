@@ -3,32 +3,32 @@ import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:equatable/equatable.dart';
 
 class NowPlayingTvSeriesState extends Equatable {
-  final RequestState nowPlayingState;
-  final List<TvSeries> nowPlayingList;
+  final RequestState stateNowPlaying;
+  final List<TvSeries> allNowPlayingList;
   final String message;
 
   NowPlayingTvSeriesState({
-    required this.nowPlayingState,
-    required this.nowPlayingList,
+    required this.stateNowPlaying,
+    required this.allNowPlayingList,
     required this.message,
   });
 
   NowPlayingTvSeriesState copyWith({
-    RequestState? nowPlayingState,
-    List<TvSeries>? nowPlayingList,
+    RequestState? stateNowPlaying,
+    List<TvSeries>? allNowPlayingList,
     String? message,
   }) {
     return NowPlayingTvSeriesState(
-      nowPlayingState: nowPlayingState ?? this.nowPlayingState,
-      nowPlayingList: nowPlayingList ?? this.nowPlayingList,
+      stateNowPlaying: stateNowPlaying ?? this.stateNowPlaying,
+      allNowPlayingList: allNowPlayingList ?? this.allNowPlayingList,
       message: message ?? this.message,
     );
   }
 
   @override
   List<Object?> get props => [
-        nowPlayingState,
-        nowPlayingList,
+        stateNowPlaying,
+        allNowPlayingList,
         message,
       ];
 }

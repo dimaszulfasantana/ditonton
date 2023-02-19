@@ -15,45 +15,47 @@ class MovieListCubit extends Cubit<MovieListState> {
     required this.fetchPopularAllMovie,
     required this.fetchTopRatedAllMovie,
   }) : super(MovieListState(
-          nowPlayingState: RequestState.Empty,
-          popularState: RequestState.Empty,
-          topRatedState: RequestState.Empty,
-          nowPlayingList: [],
-          popularList: [],
-          topRatedList: [],
+          stateNowPlaying: RequestState.Empty,
+          statePopularTvSeries: RequestState.Empty,
+          stateTopRatedTvSeries: RequestState.Empty,
+          allNowPlayingList: [],
+          allPopularList: [],
+          allTopRatedList: [],
         ));
 
   Future<void> fetchNowPlayingMovies() async {
-    emit(state
-        .copyWith(nowPlayingState: RequestState.Loading, nowPlayingList: []));
+    emit(state.copyWith(
+        stateNowPlaying: RequestState.Loading, allNowPlayingList: []));
     final result = await fetchNowPlayingAllMovie.execute();
     result.fold((failure) {
-      emit(state.copyWith(nowPlayingState: RequestState.Error));
+      emit(state.copyWith(stateNowPlaying: RequestState.Error));
     }, (result) {
       emit(state.copyWith(
-          nowPlayingState: RequestState.Loaded, nowPlayingList: result));
+          stateNowPlaying: RequestState.Loaded, allNowPlayingList: result));
     });
   }
 
   Future<void> fetchPopularMovies() async {
-    emit(state.copyWith(popularState: RequestState.Loading, popularList: []));
+    emit(state.copyWith(
+        statePopularTvSeries: RequestState.Loading, allPopularList: []));
     final result = await fetchPopularAllMovie.execute();
     result.fold((failure) {
-      emit(state.copyWith(popularState: RequestState.Error));
+      emit(state.copyWith(statePopularTvSeries: RequestState.Error));
     }, (result) {
       emit(state.copyWith(
-          popularState: RequestState.Loaded, popularList: result));
+          statePopularTvSeries: RequestState.Loaded, allPopularList: result));
     });
   }
 
   Future<void> fetchTopRatedMovies() async {
-    emit(state.copyWith(topRatedState: RequestState.Loading, topRatedList: []));
+    emit(state.copyWith(
+        stateTopRatedTvSeries: RequestState.Loading, allTopRatedList: []));
     final result = await fetchTopRatedAllMovie.execute();
     result.fold((failure) {
-      emit(state.copyWith(topRatedState: RequestState.Error));
+      emit(state.copyWith(stateTopRatedTvSeries: RequestState.Error));
     }, (result) {
       emit(state.copyWith(
-          topRatedState: RequestState.Loaded, topRatedList: result));
+          stateTopRatedTvSeries: RequestState.Loaded, allTopRatedList: result));
     });
   }
 }

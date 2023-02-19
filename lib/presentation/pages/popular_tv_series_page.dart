@@ -31,17 +31,17 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<PopularTvSeriesCubit, PopularTvSeriesState>(
             builder: (context, state) {
-          if (state.popularState == RequestState.Loading) {
+          if (state.statePopularTvSeries == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state.popularState == RequestState.Loaded) {
+          } else if (state.statePopularTvSeries == RequestState.Loaded) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final tvSeries = state.popularList[index];
+                final tvSeries = state.allPopularList[index];
                 return TvSeriesCardList(tvSeries: tvSeries);
               },
-              itemCount: state.popularList.length,
+              itemCount: state.allPopularList.length,
             );
           } else {
             return Center(

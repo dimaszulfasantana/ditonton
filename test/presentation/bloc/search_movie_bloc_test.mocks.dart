@@ -38,9 +38,11 @@ class MockSearchMovies extends _i1.Mock implements _i4.SearchMovies {
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>> execute(String? query) =>
+  _i5.Future<_i3.Either<_i6.FailureException, List<_i7.Movie>>> execute(
+          String? query) =>
       (super.noSuchMethod(Invocation.method(#execute, [query]),
-          returnValue: Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>.value(
-              _FakeEither_1<_i6.Failure, List<_i7.Movie>>())) as _i5
-          .Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>);
+              returnValue: Future<
+                      _i3.Either<_i6.FailureException, List<_i7.Movie>>>.value(
+                  _FakeEither_1<_i6.FailureException, List<_i7.Movie>>()))
+          as _i5.Future<_i3.Either<_i6.FailureException, List<_i7.Movie>>>);
 }

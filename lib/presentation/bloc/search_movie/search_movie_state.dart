@@ -3,32 +3,33 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 class SearchMovieState extends Equatable {
-  final RequestState searchMovieState;
-  final List<Movie> moviesList;
+  final RequestState stateSearchMovieDataState;
+  final List<Movie> allMovieList;
   final String message;
 
   SearchMovieState({
-    required this.searchMovieState,
-    required this.moviesList,
+    required this.stateSearchMovieDataState,
+    required this.allMovieList,
     required this.message,
   });
 
   SearchMovieState copyWith({
-    RequestState? searchMovieState,
-    List<Movie>? moviesList,
+    RequestState? stateSearchMovieDataState,
+    List<Movie>? allMovieList,
     String? message,
   }) {
     return SearchMovieState(
-      searchMovieState: searchMovieState ?? this.searchMovieState,
-      moviesList: moviesList ?? this.moviesList,
+      stateSearchMovieDataState:
+          stateSearchMovieDataState ?? this.stateSearchMovieDataState,
+      allMovieList: allMovieList ?? this.allMovieList,
       message: message ?? this.message,
     );
   }
 
   @override
   List<Object?> get props => [
-        searchMovieState,
-        moviesList,
+        stateSearchMovieDataState,
+        allMovieList,
         message,
       ];
 }

@@ -9,7 +9,7 @@ class GetTvSeriesDetail {
     required this.tvSeriesRepository,
   });
 
-  Future<Either<Failure, TvDetails>> execute(int seriesId) {
+  Future<Either<FailureException, TvDetails>> execute(int seriesId) {
     return tvSeriesRepository.fetchTvSeriesDataDetails(seriesId);
   }
 }

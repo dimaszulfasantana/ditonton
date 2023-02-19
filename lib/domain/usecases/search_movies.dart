@@ -8,7 +8,7 @@ class SearchMovies {
 
   SearchMovies(this.repository);
 
-  Future<Either<Failure, List<Movie>>> execute(String query) {
+  Future<Either<FailureException, List<Movie>>> execute(String query) {
     return repository.findAllMovies(query);
   }
 }

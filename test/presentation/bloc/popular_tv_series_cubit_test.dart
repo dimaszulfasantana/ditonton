@@ -42,14 +42,14 @@ void main() {
       voteAverage: 1,
       voteCount: 1);
 
-  final tvSeriesList = <TvSeries>[tvSeries];
+  final allTvSeriesList = <TvSeries>[tvSeries];
 
   group('Popular Tv Series', () {
     blocTest<PopularTvSeriesCubit, PopularTvSeriesState>(
       'should return data from usecase',
       build: () {
         when(mockGetPopularTvSeries.execute())
-            .thenAnswer((_) async => Right(tvSeriesList));
+            .thenAnswer((_) async => Right(allTvSeriesList));
         return bloc;
       },
       act: (cubit) => cubit.fetchPopularTvSeries(),
@@ -62,18 +62,18 @@ void main() {
         'should change state to loading then loaded when function called',
         build: () {
           when(mockGetPopularTvSeries.execute())
-              .thenAnswer((_) async => Right(tvSeriesList));
+              .thenAnswer((_) async => Right(allTvSeriesList));
           return bloc;
         },
         act: (cubit) => cubit.fetchPopularTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                popularState: RequestState.Loading,
-                popularList: [],
+                statePopularTvSeries: RequestState.Loading,
+                allPopularList: [],
               ),
               bloc.state.copyWith(
-                popularState: RequestState.Loaded,
-                popularList: tvSeriesList,
+                statePopularTvSeries: RequestState.Loaded,
+                allPopularList: allTvSeriesList,
               )
             ]);
 
@@ -81,17 +81,17 @@ void main() {
         'should return failure and error state when fetch now playing failed',
         build: () {
           when(mockGetPopularTvSeries.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchPopularTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                popularState: RequestState.Loading,
+                statePopularTvSeries: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                popularState: RequestState.Error,
+                statePopularTvSeries: RequestState.Error,
                 message: 'Failed',
               )
             ]);

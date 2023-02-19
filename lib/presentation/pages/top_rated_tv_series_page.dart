@@ -32,17 +32,17 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(
             builder: (context, state) {
-          if (state.topRatedState == RequestState.Loading) {
+          if (state.stateTopRatedTvSeries == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state.topRatedState == RequestState.Loaded) {
+          } else if (state.stateTopRatedTvSeries == RequestState.Loaded) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final tvSeries = state.topRatedList[index];
+                final tvSeries = state.allTopRatedList[index];
                 return TvSeriesCardList(tvSeries: tvSeries);
               },
-              itemCount: state.topRatedList.length,
+              itemCount: state.allTopRatedList.length,
             );
           } else {
             return Center(

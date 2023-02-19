@@ -9,21 +9,24 @@ class PopularMoviesCubit extends Cubit<PopularMoviesState> {
   PopularMoviesCubit({
     required this.fetchPopularAllMovie,
   }) : super(PopularMoviesState(
-          popularMoviesState: RequestState.Empty,
-          popularMovies: [],
+          statePopularAllMoviesData: RequestState.Empty,
+          allPopularMoviesData: [],
           message: "",
         ));
 
   Future<void> fetchPopularMovies() async {
-    emit(state
-        .copyWith(popularMoviesState: RequestState.Loading, popularMovies: []));
+    emit(state.copyWith(
+        statePopularAllMoviesData: RequestState.Loading,
+        allPopularMoviesData: []));
     final result = await fetchPopularAllMovie.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          popularMoviesState: RequestState.Error, message: failure.message));
+          statePopularAllMoviesData: RequestState.Error,
+          message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          popularMoviesState: RequestState.Loaded, popularMovies: result));
+          statePopularAllMoviesData: RequestState.Loaded,
+          allPopularMoviesData: result));
     });
   }
 }

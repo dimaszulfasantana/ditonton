@@ -124,16 +124,16 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           children: [
             Text(
               'Now Playing',
-              style: kHeading6,
+              style: headLineBigger,
             ),
             BlocBuilder<MovieListCubit, MovieListState>(
                 builder: (context, state) {
-              if (state.nowPlayingState == RequestState.Loading) {
+              if (state.stateNowPlaying == RequestState.Loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state.nowPlayingState == RequestState.Loaded) {
-                return MovieList(state.nowPlayingList);
+              } else if (state.stateNowPlaying == RequestState.Loaded) {
+                return MovieList(state.allNowPlayingList);
               } else {
                 return Text("Failed");
               }
@@ -145,12 +145,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             BlocBuilder<MovieListCubit, MovieListState>(
                 builder: (context, state) {
-              if (state.popularState == RequestState.Loading) {
+              if (state.statePopularTvSeries == RequestState.Loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state.popularState == RequestState.Loaded) {
-                return MovieList(state.popularList);
+              } else if (state.statePopularTvSeries == RequestState.Loaded) {
+                return MovieList(state.allPopularList);
               } else {
                 return Text("Failed");
               }
@@ -162,12 +162,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             BlocBuilder<MovieListCubit, MovieListState>(
                 builder: (context, state) {
-              if (state.topRatedState == RequestState.Loading) {
+              if (state.stateTopRatedTvSeries == RequestState.Loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state.topRatedState == RequestState.Loaded) {
-                return MovieList(state.topRatedList);
+              } else if (state.stateTopRatedTvSeries == RequestState.Loaded) {
+                return MovieList(state.allTopRatedList);
               } else {
                 return Text("Failed");
               }
@@ -193,12 +193,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             BlocBuilder<TvSeriesListCubit, TvSeriesListState>(
               builder: (context, state) {
-                if (state.nowPlayingState == RequestState.Loading) {
+                if (state.stateNowPlaying == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state.nowPlayingState == RequestState.Loaded) {
-                  return TvSeriesList(state.nowPlayingList);
+                } else if (state.stateNowPlaying == RequestState.Loaded) {
+                  return TvSeriesList(state.allNowPlayingList);
                 } else {
                   return Text('Failed');
                 }
@@ -212,12 +212,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             BlocBuilder<TvSeriesListCubit, TvSeriesListState>(
               builder: (context, state) {
-                if (state.popularState == RequestState.Loading) {
+                if (state.statePopularTvSeries == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state.popularState == RequestState.Loaded) {
-                  return TvSeriesList(state.popularList);
+                } else if (state.statePopularTvSeries == RequestState.Loaded) {
+                  return TvSeriesList(state.allPopularList);
                 } else {
                   return Text('Failed');
                 }
@@ -231,12 +231,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             BlocBuilder<TvSeriesListCubit, TvSeriesListState>(
               builder: (context, state) {
-                if (state.topRatedState == RequestState.Loading) {
+                if (state.stateTopRatedTvSeries == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state.topRatedState == RequestState.Loaded) {
-                  return TvSeriesList(state.topRatedList);
+                } else if (state.stateTopRatedTvSeries == RequestState.Loaded) {
+                  return TvSeriesList(state.allTopRatedList);
                 } else {
                   return Text('Failed');
                 }
@@ -254,7 +254,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       children: [
         Text(
           title,
-          style: kHeading6,
+          style: headLineBigger,
         ),
         InkWell(
           onTap: onTap,

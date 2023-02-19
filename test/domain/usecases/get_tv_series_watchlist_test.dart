@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTvSeriesWatchlist getTvSeriesWatchlist;
+  late GetTvSeriesWatchlist getAllTvSeriesWatchlist;
   late MockTvSeriesRepository mockTvSeriesRepository;
 
   setUp(() {
     mockTvSeriesRepository = MockTvSeriesRepository();
-    getTvSeriesWatchlist =
+    getAllTvSeriesWatchlist =
         GetTvSeriesWatchlist(tvSeriesRepository: mockTvSeriesRepository);
   });
 
@@ -21,7 +21,7 @@ void main() {
     when(mockTvSeriesRepository.fetchWatchListTvDataSeries())
         .thenAnswer((_) async => Right(testTvSeriesList));
     // act
-    final result = await getTvSeriesWatchlist.execute();
+    final result = await getAllTvSeriesWatchlist.execute();
     // assert
     expect(result, Right(testTvSeriesList));
   });

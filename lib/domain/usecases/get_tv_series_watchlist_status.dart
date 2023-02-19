@@ -7,6 +7,6 @@ class GetTvSeriesWatchlistStatus {
   });
 
   Future<bool> execute(int id) async {
-    return await tvSeriesRepository.isAddedToWatchlist(id);
+    return await tvSeriesRepository.isAddedToWatchListorNot(id);
   }
 }

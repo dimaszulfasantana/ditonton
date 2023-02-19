@@ -61,7 +61,7 @@ void main() {
   );
 
   final tvSeriesResultList = <TvSeriesResults>[tvSeriesModel];
-  final tvSeriesList = <TvSeries>[tvSeries];
+  final allTvSeriesList = <TvSeries>[tvSeries];
 
   group('now playing tv series', () {
     test(
@@ -76,19 +76,19 @@ void main() {
       verify(mockTvSeriesRemoteDataSource.fetchNowPlayingTvSeriesData());
 
       final resultList = result.getOrElse(() => []);
-      expect(resultList, tvSeriesList);
+      expect(resultList, allTvSeriesList);
     });
 
     test('should return server failure when call to remote data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchNowPlayingTvSeriesData())
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchNowPlayingTvSeriesData();
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchNowPlayingTvSeriesData());
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test(
@@ -101,8 +101,10 @@ void main() {
       final result = await repository.fetchNowPlayingTvSeriesData();
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchNowPlayingTvSeriesData());
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
@@ -119,19 +121,19 @@ void main() {
       verify(mockTvSeriesRemoteDataSource.fetchPopularTvSeriesData());
 
       final resultList = result.getOrElse(() => []);
-      expect(resultList, tvSeriesList);
+      expect(resultList, allTvSeriesList);
     });
 
     test('should return server failure when call to remote data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchPopularTvSeriesData())
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchPopularTvSeriesData();
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchPopularTvSeriesData());
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test(
@@ -144,8 +146,10 @@ void main() {
       final result = await repository.fetchPopularTvSeriesData();
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchPopularTvSeriesData());
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
@@ -162,19 +166,19 @@ void main() {
       verify(mockTvSeriesRemoteDataSource.fetchTopRatedTvSeriesData());
 
       final resultList = result.getOrElse(() => []);
-      expect(resultList, tvSeriesList);
+      expect(resultList, allTvSeriesList);
     });
 
     test('should return server failure when call to remote data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchTopRatedTvSeriesData())
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchTopRatedTvSeriesData();
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchTopRatedTvSeriesData());
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test(
@@ -187,14 +191,16 @@ void main() {
       final result = await repository.fetchTopRatedTvSeriesData();
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchTopRatedTvSeriesData());
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
   group('get tv series details', () {
     final id = 1;
-    final tvSeriesDetail = TvSeriesDetails(
+    final allTvSeriesDetail = TvSeriesDetails(
       adult: false,
       backdropPath: 'backdropPath',
       createdBy: ['createdBy'],
@@ -238,7 +244,7 @@ void main() {
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchTvSeriesDataDetails(id))
-          .thenAnswer((_) async => tvSeriesDetail);
+          .thenAnswer((_) async => allTvSeriesDetail);
       // act
       final result = await repository.fetchTvSeriesDataDetails(id);
       // assert
@@ -246,16 +252,17 @@ void main() {
       expect(result, equals(Right(testTvSeriesDetail)));
     });
 
-    test('should return ServerFailure when call to remote data source failed',
+    test(
+        'should return FailureServerException when call to remote data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchTvSeriesDataDetails(id))
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchTvSeriesDataDetails(id);
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchTvSeriesDataDetails(id));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test('should return SocketException when there is no connection', () async {
@@ -266,41 +273,44 @@ void main() {
       final result = await repository.fetchTvSeriesDataDetails(id);
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchTvSeriesDataDetails(id));
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
   group('get tv series recommendations', () {
-    final tvSeriesList = <TvSeriesResults>[];
+    final allTvSeriesList = <TvSeriesResults>[];
     final id = 0;
 
     test('should return data list when call is successful', () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchTvSeriesRecommendationsData(id))
-          .thenAnswer((_) async => tvSeriesList);
+          .thenAnswer((_) async => allTvSeriesList);
       // act
       final result = await repository.fetchTvSeriesRecommendationsData(id);
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchTvSeriesRecommendationsData(id));
       final resultList = result.getOrElse(() => []);
-      expect(resultList, equals(tvSeriesList));
+      expect(resultList, equals(allTvSeriesList));
     });
 
-    test('should return ServerFailure when call to remote data source failed',
+    test(
+        'should return FailureServerException when call to remote data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchTvSeriesRecommendationsData(id))
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchTvSeriesRecommendationsData(id);
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchTvSeriesRecommendationsData(id));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test(
-        'should return ConnectionFailure when call to remote data source failed',
+        'should return FailureConnectionException when call to remote data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchTvSeriesRecommendationsData(id))
@@ -309,8 +319,10 @@ void main() {
       final result = await repository.fetchTvSeriesRecommendationsData(id);
       // assert
       verify(mockTvSeriesRemoteDataSource.fetchTvSeriesRecommendationsData(id));
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
@@ -326,21 +338,22 @@ void main() {
       final result = await repository.fetchSearchTvSeriesData(query);
       // assert
       final resultList = result.getOrElse(() => []);
-      expect(resultList, tvSeriesList);
+      expect(resultList, allTvSeriesList);
     });
 
-    test('should return ServerFailure when call to data source failed',
+    test('should return FailureServerException when call to data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchSearchTvSeriesData(query))
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchSearchTvSeriesData(query);
       // assert
-      expect(result, Left(ServerFailure('')));
+      expect(result, Left(FailureServerException('')));
     });
 
-    test('should return ConnectionFailure when call to data source failed',
+    test(
+        'should return FailureConnectionException when call to data source failed',
         () async {
       // arrange
       when(mockTvSeriesRemoteDataSource.fetchSearchTvSeriesData(query))
@@ -348,8 +361,8 @@ void main() {
       // act
       final result = await repository.fetchSearchTvSeriesData(query);
       // assert
-      expect(
-          result, Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          Left(FailureConnectionException('Failed to connect to the network')));
     });
   });
 
@@ -365,15 +378,16 @@ void main() {
       expect(result, Right('Added to Watchlist'));
     });
 
-    test('should return DatabaseFailure when saving to database failed',
+    test(
+        'should return FailureDatabaseException when saving to database failed',
         () async {
       // arrange
       when(mockTvSeriesLocalDataSource.addToWatchList(testTvSeriesTable))
-          .thenThrow(DatabaseException('Failed to add watchlist'));
+          .thenThrow(ErrorDatabaseFoundException('Failed to add watchlist'));
       // act
       final result = await repository.addToWatchList(testTvSeriesDetail);
       // assert
-      expect(result, Left(DatabaseFailure('Failed to add watchlist')));
+      expect(result, Left(FailureDatabaseException('Failed to add watchlist')));
     });
   });
 
@@ -389,15 +403,17 @@ void main() {
       expect(result, Right('Removed from watchlist'));
     });
 
-    test('should return DatabaseFailure when remove from database failed',
+    test(
+        'should return FailureDatabaseException when remove from database failed',
         () async {
       // arrange
       when(mockTvSeriesLocalDataSource.deleteFromWatchList(testTvSeriesTable))
-          .thenThrow(DatabaseException('Failed to remove watchlist'));
+          .thenThrow(ErrorDatabaseFoundException('Failed to remove watchlist'));
       // act
       final result = await repository.deleteFromWatchList(testTvSeriesDetail);
       // assert
-      expect(result, Left(DatabaseFailure('Failed to remove watchlist')));
+      expect(
+          result, Left(FailureDatabaseException('Failed to remove watchlist')));
     });
   });
 
@@ -408,7 +424,7 @@ void main() {
       when(mockTvSeriesLocalDataSource.fetchTvSeriesDataById(id))
           .thenAnswer((_) async => null);
       // act
-      final result = await repository.isAddedToWatchlist(id);
+      final result = await repository.isAddedToWatchListorNot(id);
       // assert
       expect(result, false);
     });

@@ -47,7 +47,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               child: DetailContent(
                 movie,
                 state.movieRecommendations,
-                state.isAddedToWatchlist,
+                state.isAddedToWatchListorNot,
               ),
             );
           } else {
@@ -85,7 +85,7 @@ class DetailContent extends StatelessWidget {
             builder: (context, scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: kRichBlack,
+                  color: colourNavy,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 padding: const EdgeInsets.only(
@@ -104,7 +104,7 @@ class DetailContent extends StatelessWidget {
                           children: [
                             Text(
                               movie.title,
-                              style: kHeading5,
+                              style: headlineBig,
                             ),
                             ElevatedButton(
                               onPressed: () async {
@@ -129,10 +129,10 @@ class DetailContent extends StatelessWidget {
                                 final message = context
                                     .read<MovieDetailCubit>()
                                     .state
-                                    .watchlistMessage;
+                                    .allWatchedListMessage;
                                 // Provider.of<MovieDetailNotifier>(context,
                                 //         listen: false)
-                                //     .watchlistMessage;
+                                //     .allWatchedListMessage;
 
                                 if (message ==
                                         MovieDetailCubit
@@ -175,7 +175,7 @@ class DetailContent extends StatelessWidget {
                                   itemCount: 5,
                                   itemBuilder: (context, index) => Icon(
                                     Icons.star,
-                                    color: kMikadoYellow,
+                                    color: colourDarkYellow,
                                   ),
                                   itemSize: 24,
                                 ),
@@ -185,7 +185,7 @@ class DetailContent extends StatelessWidget {
                             SizedBox(height: 16),
                             Text(
                               'Overview',
-                              style: kHeading6,
+                              style: headLineBigger,
                             ),
                             Text(
                               movie.overview,
@@ -193,19 +193,21 @@ class DetailContent extends StatelessWidget {
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',
-                              style: kHeading6,
+                              style: headLineBigger,
                             ),
                             BlocBuilder<MovieDetailCubit, MovieDetailState>(
                               builder: (context, state) {
-                                if (state.recommendationsState ==
+                                if (state.stateAllRecommendationTvSeries ==
                                     RequestState.Loading) {
                                   return Center(
                                     child: CircularProgressIndicator(),
                                   );
-                                } else if (state.recommendationsState ==
+                                } else if (state
+                                        .stateAllRecommendationTvSeries ==
                                     RequestState.Error) {
                                   return Text(state.message);
-                                } else if (state.recommendationsState ==
+                                } else if (state
+                                        .stateAllRecommendationTvSeries ==
                                     RequestState.Loaded) {
                                   return Container(
                                     height: 150,
@@ -275,7 +277,7 @@ class DetailContent extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: kRichBlack,
+            backgroundColor: colourNavy,
             foregroundColor: Colors.white,
             child: IconButton(
               icon: Icon(Icons.arrow_back),

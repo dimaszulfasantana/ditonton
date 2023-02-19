@@ -53,12 +53,12 @@ void main() {
       act: (cubit) => cubit.add(SearchMovieFetchEvent(query: tQuery)),
       expect: () => [
         bloc.state.copyWith(
-          searchMovieState: RequestState.Loading,
-          moviesList: [],
+          stateSearchMovieDataState: RequestState.Loading,
+          allMovieList: [],
         ),
         bloc.state.copyWith(
-          searchMovieState: RequestState.Loaded,
-          moviesList: tMovieList,
+          stateSearchMovieDataState: RequestState.Loaded,
+          allMovieList: tMovieList,
         ),
       ],
     );
@@ -67,17 +67,17 @@ void main() {
       'should return server failure when data is unsuccessful',
       build: () {
         when(mockSearchMovies.execute(tQuery))
-            .thenAnswer((_) async => Left(ServerFailure('Failed')));
+            .thenAnswer((_) async => Left(FailureServerException('Failed')));
         return bloc;
       },
       act: (cubit) => cubit.add(SearchMovieFetchEvent(query: tQuery)),
       expect: () => [
         bloc.state.copyWith(
-          searchMovieState: RequestState.Loading,
+          stateSearchMovieDataState: RequestState.Loading,
           message: '',
         ),
         bloc.state.copyWith(
-          searchMovieState: RequestState.Error,
+          stateSearchMovieDataState: RequestState.Error,
           message: 'Failed',
         ),
       ],

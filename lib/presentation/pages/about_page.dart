@@ -13,7 +13,7 @@ class AboutPage extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  color: kPrussianBlue,
+                  color: colourBlueLight,
                   child: Center(
                     child: Image.asset(
                       'assets/circle-g.png',
@@ -25,7 +25,7 @@ class AboutPage extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(32.0),
-                  color: kMikadoYellow,
+                  color: colourDarkYellow,
                   child: Text(
                     'Ditonton adalah salah satu aplikasi yang pernah saya buat untuk memenuhi kebutuhan submission menjadi flutter developer expert. Selain itu aplikasi ini juga saya gunakan sebagai portofolio agar mendukung pekerjaan saya kedepannya..',
                     style: TextStyle(color: Colors.black87, fontSize: 16),

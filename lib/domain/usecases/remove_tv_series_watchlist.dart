@@ -9,7 +9,7 @@ class RemoveTvSeriesWatchlist {
     required this.tvSeriesRepository,
   });
 
-  Future<Either<Failure, String>> execute(TvDetails tvSeries) async {
+  Future<Either<FailureException, String>> execute(TvDetails tvSeries) async {
     return await tvSeriesRepository.deleteFromWatchList(tvSeries);
   }
 }

@@ -58,30 +58,30 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
             ),
             BlocBuilder<WatchlistCubit, WatchlistState>(
               builder: (context, state) {
-                if (state.watchlistMovieState == RequestState.Loading ||
-                    state.watchlistTvSeriesState == RequestState.Loading) {
+                if (state.allWatchedMovieState == RequestState.Loading ||
+                    state.allWatchedListTvSeriesState == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state.watchlistMovieState == RequestState.Loaded ||
-                    state.watchlistTvSeriesState == RequestState.Loaded) {
+                } else if (state.allWatchedMovieState == RequestState.Loaded ||
+                    state.allWatchedListTvSeriesState == RequestState.Loaded) {
                   return Expanded(
                     child: dropDownValue == 0
                         ? ListView.builder(
                             itemBuilder: (context, index) {
-                              final movie = state.movieList[index];
+                              final movie = state.allMovie[index];
                               return MovieCard(movie);
                             },
-                            itemCount: state.movieList.length,
+                            itemCount: state.allMovie.length,
                           )
                         : ListView.builder(
                             itemBuilder: (context, index) {
-                              final tvSeries = state.tvSeriesList[index];
+                              final tvSeries = state.allTvSeriesList[index];
                               return TvSeriesCardList(
                                 tvSeries: tvSeries,
                               );
                             },
-                            itemCount: state.tvSeriesList.length,
+                            itemCount: state.allTvSeriesList.length,
                           ),
                   );
                 } else {

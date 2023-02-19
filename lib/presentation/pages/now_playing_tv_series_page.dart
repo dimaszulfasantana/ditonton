@@ -32,17 +32,17 @@ class _NowPlayingTvSeriesPageState extends State<NowPlayingTvSeriesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<NowPlayingTvSeriesCubit, NowPlayingTvSeriesState>(
             builder: (context, state) {
-          if (state.nowPlayingState == RequestState.Loading) {
+          if (state.stateNowPlaying == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state.nowPlayingState == RequestState.Loaded) {
+          } else if (state.stateNowPlaying == RequestState.Loaded) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final tvSeries = state.nowPlayingList[index];
+                final tvSeries = state.allNowPlayingList[index];
                 return TvSeriesCardList(tvSeries: tvSeries);
               },
-              itemCount: state.nowPlayingList.length,
+              itemCount: state.allNowPlayingList.length,
             );
           } else {
             return Center(

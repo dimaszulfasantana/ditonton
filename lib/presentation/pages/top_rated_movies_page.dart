@@ -31,17 +31,17 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedMoviesCubit, TopRatedMoviesState>(
           builder: (context, state) {
-            if (state.topRatedMoviesState == RequestState.Loading) {
+            if (state.stateTopRatedAllMovies == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state.topRatedMoviesState == RequestState.Loaded) {
+            } else if (state.stateTopRatedAllMovies == RequestState.Loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = state.topRatedMovies[index];
+                  final movie = state.allTopRatedMovie[index];
                   return MovieCard(movie);
                 },
-                itemCount: state.topRatedMovies.length,
+                itemCount: state.allTopRatedMovie.length,
               );
             } else {
               return Center(

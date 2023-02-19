@@ -5,44 +5,45 @@ import 'package:ditonton/presentation/bloc/watchlist/watchlist_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistCubit extends Cubit<WatchlistState> {
-  final GetWatchlistMovies fetchWatchListAllMovie;
-  final GetTvSeriesWatchlist getTvSeriesWatchlist;
+  final GetWatchlistMovies getAllWatchListMovie;
+  final GetTvSeriesWatchlist getAllTvSeriesWatchlist;
 
   WatchlistCubit({
-    required this.fetchWatchListAllMovie,
-    required this.getTvSeriesWatchlist,
+    required this.getAllWatchListMovie,
+    required this.getAllTvSeriesWatchlist,
   }) : super(
           WatchlistState(
-            watchlistMovieState: RequestState.Empty,
-            watchlistTvSeriesState: RequestState.Empty,
-            movieList: [],
-            tvSeriesList: [],
+            allWatchedMovieState: RequestState.Empty,
+            allWatchedListTvSeriesState: RequestState.Empty,
+            allMovie: [],
+            allTvSeriesList: [],
             message: '',
           ),
         );
 
   Future<void> fetchMoviesWatchlist() async {
-    emit(state.copyWith(watchlistMovieState: RequestState.Loading));
-    final result = await fetchWatchListAllMovie.execute();
+    emit(state.copyWith(allWatchedMovieState: RequestState.Loading));
+    final result = await getAllWatchListMovie.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          watchlistMovieState: RequestState.Error, message: failure.message));
+          allWatchedMovieState: RequestState.Error, message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          watchlistMovieState: RequestState.Loaded, movieList: result));
+          allWatchedMovieState: RequestState.Loaded, allMovie: result));
     });
   }
 
   Future<void> fetchTvSeriesWatchlist() async {
-    emit(state.copyWith(watchlistTvSeriesState: RequestState.Loading));
-    final result = await getTvSeriesWatchlist.execute();
+    emit(state.copyWith(allWatchedListTvSeriesState: RequestState.Loading));
+    final result = await getAllTvSeriesWatchlist.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          watchlistTvSeriesState: RequestState.Error,
+          allWatchedListTvSeriesState: RequestState.Error,
           message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          watchlistTvSeriesState: RequestState.Loaded, tvSeriesList: result));
+          allWatchedListTvSeriesState: RequestState.Loaded,
+          allTvSeriesList: result));
     });
   }
 }

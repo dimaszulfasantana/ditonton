@@ -27,7 +27,8 @@ void main() {
       expect(result, 'Added to Watchlist');
     });
 
-    test('should throw DatabaseException when insert to database is failed',
+    test(
+        'should throw ErrorDatabaseFoundException when insert to database is failed',
         () async {
       // arrange
       when(mockDatabaseHelper.insertTvWatchlist(testTvSeriesTable))
@@ -35,7 +36,7 @@ void main() {
       // act
       final call = dataSource.addToWatchList(testTvSeriesTable);
       // assert
-      expect(() => call, throwsA(isA<DatabaseException>()));
+      expect(() => call, throwsA(isA<ErrorDatabaseFoundException>()));
     });
   });
 
@@ -51,7 +52,8 @@ void main() {
       expect(result, 'Removed from Watchlist');
     });
 
-    test('should throw DatabaseException when remove to database is failed',
+    test(
+        'should throw ErrorDatabaseFoundException when remove to database is failed',
         () async {
       // arrange
       when(mockDatabaseHelper.removeTvWatchlist(testTvSeriesTable))
@@ -59,7 +61,7 @@ void main() {
       // act
       final call = dataSource.deleteFromWatchList(testTvSeriesTable);
       // assert
-      expect(() => call, throwsA(isA<DatabaseException>()));
+      expect(() => call, throwsA(isA<ErrorDatabaseFoundException>()));
     });
   });
 

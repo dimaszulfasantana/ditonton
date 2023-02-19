@@ -41,7 +41,7 @@ void main() {
       voteAverage: 1,
       voteCount: 1);
 
-  final tvSeriesList = <TvSeries>[tvSeries];
+  final allTvSeriesList = <TvSeries>[tvSeries];
   final query = "All of Us Are Dead";
 
   group('Search Tv Series', () {
@@ -49,18 +49,18 @@ void main() {
       'should change state to loading then loaded when usecase is called',
       build: () {
         when(mockSearchTvSeries.execute(query))
-            .thenAnswer((_) async => Right(tvSeriesList));
+            .thenAnswer((_) async => Right(allTvSeriesList));
         return bloc;
       },
       act: (cubit) => cubit.add(SearchTvSeriesFetchEvent(query: query)),
       expect: () => [
         bloc.state.copyWith(
-          searchTvSeriesState: RequestState.Loading,
-          tvSeriesList: [],
+          stateSearchTvSeries: RequestState.Loading,
+          allTvSeriesList: [],
         ),
         bloc.state.copyWith(
-          searchTvSeriesState: RequestState.Loaded,
-          tvSeriesList: tvSeriesList,
+          stateSearchTvSeries: RequestState.Loaded,
+          allTvSeriesList: allTvSeriesList,
         ),
       ],
     );
@@ -69,17 +69,17 @@ void main() {
       'should return server failure when data is unsuccessful',
       build: () {
         when(mockSearchTvSeries.execute(query))
-            .thenAnswer((_) async => Left(ServerFailure('Failed')));
+            .thenAnswer((_) async => Left(FailureServerException('Failed')));
         return bloc;
       },
       act: (cubit) => cubit.add(SearchTvSeriesFetchEvent(query: query)),
       expect: () => [
         bloc.state.copyWith(
-          searchTvSeriesState: RequestState.Loading,
+          stateSearchTvSeries: RequestState.Loading,
           message: '',
         ),
         bloc.state.copyWith(
-          searchTvSeriesState: RequestState.Error,
+          stateSearchTvSeries: RequestState.Error,
           message: 'Failed',
         ),
       ],

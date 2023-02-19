@@ -8,7 +8,7 @@ class GetWatchlistMovies {
 
   GetWatchlistMovies(this._repository);
 
-  Future<Either<Failure, List<Movie>>> execute() {
-    return _repository.fetchWatchListAllMovie();
+  Future<Either<FailureException, List<Movie>>> execute() {
+    return _repository.getAllWatchListMovie();
   }
 }

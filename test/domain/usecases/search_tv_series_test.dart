@@ -16,16 +16,16 @@ void main() {
   });
 
   final query = 'Drama';
-  final tvSeriesList = <TvSeries>[];
+  final allTvSeriesList = <TvSeries>[];
 
   test('should return popular tv series list when get from repository',
       () async {
     // arrange
     when(mockTvSeriesRepository.fetchSearchTvSeriesData(query))
-        .thenAnswer((_) async => Right(tvSeriesList));
+        .thenAnswer((_) async => Right(allTvSeriesList));
     // act
     final result = await searchTvSeries.execute(query);
     // assert
-    expect(result, Right(tvSeriesList));
+    expect(result, Right(allTvSeriesList));
   });
 }

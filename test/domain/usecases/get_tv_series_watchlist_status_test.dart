@@ -18,7 +18,7 @@ void main() {
 
   test('should return tv series watchlist status by id', () async {
     // arrange
-    when(mockTvSeriesRepository.isAddedToWatchlist(id))
+    when(mockTvSeriesRepository.isAddedToWatchListorNot(id))
         .thenAnswer((_) async => true);
     // act
     final result = await getTvSeriesWatchlistStatus.execute(id);

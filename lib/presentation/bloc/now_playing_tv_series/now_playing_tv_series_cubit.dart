@@ -9,20 +9,20 @@ class NowPlayingTvSeriesCubit extends Cubit<NowPlayingTvSeriesState> {
   NowPlayingTvSeriesCubit({
     required this.fetchNowPlayingTvSeriesData,
   }) : super(NowPlayingTvSeriesState(
-            nowPlayingState: RequestState.Empty,
-            nowPlayingList: [],
+            stateNowPlaying: RequestState.Empty,
+            allNowPlayingList: [],
             message: ''));
 
   Future<void> fetchNowPlayingTvSeries() async {
-    emit(state
-        .copyWith(nowPlayingState: RequestState.Loading, nowPlayingList: []));
+    emit(state.copyWith(
+        stateNowPlaying: RequestState.Loading, allNowPlayingList: []));
     final result = await fetchNowPlayingTvSeriesData.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          nowPlayingState: RequestState.Error, message: failure.message));
+          stateNowPlaying: RequestState.Error, message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          nowPlayingState: RequestState.Loaded, nowPlayingList: result));
+          stateNowPlaying: RequestState.Loaded, allNowPlayingList: result));
     });
   }
 }

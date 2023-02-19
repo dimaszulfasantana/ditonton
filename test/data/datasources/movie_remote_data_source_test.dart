@@ -12,7 +12,7 @@ import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
+  const API_KEY = 'api_key=f2b6532a9eb023856af46693bf6a6478';
   const BASE_URL = 'https://api.themoviedb.org/3';
 
   late MovieRemoteDataSourceImpl dataSource;
@@ -26,7 +26,7 @@ void main() {
   group('get Now Playing Movies', () {
     final tMovieList = MovieResponse.fromJson(
             json.decode(readJson('dummy_data/now_playing.json')))
-        .movieList;
+        .allMovie;
 
     test('should return list of Movie Model when the response code is 200',
         () async {
@@ -42,7 +42,7 @@ void main() {
     });
 
     test(
-        'should throw a ServerException when the response code is 404 or other',
+        'should throw a ErrorServerFoundException when the response code is 404 or other',
         () async {
       // arrange
       when(mockHttpClient
@@ -51,14 +51,14 @@ void main() {
       // act
       final call = dataSource.fetchNowPlayingAllMovie();
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
   group('get Popular Movies', () {
     final tMovieList =
         MovieResponse.fromJson(json.decode(readJson('dummy_data/popular.json')))
-            .movieList;
+            .allMovie;
 
     test('should return list of movies when response is success (200)',
         () async {
@@ -73,7 +73,7 @@ void main() {
     });
 
     test(
-        'should throw a ServerException when the response code is 404 or other',
+        'should throw a ErrorServerFoundException when the response code is 404 or other',
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/popular?$API_KEY')))
@@ -81,14 +81,14 @@ void main() {
       // act
       final call = dataSource.fetchPopularAllMovie();
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
   group('get Top Rated Movies', () {
     final tMovieList = MovieResponse.fromJson(
             json.decode(readJson('dummy_data/top_rated.json')))
-        .movieList;
+        .allMovie;
 
     test('should return list of movies when response code is 200 ', () async {
       // arrange
@@ -101,7 +101,8 @@ void main() {
       expect(result, tMovieList);
     });
 
-    test('should throw ServerException when response code is other than 200',
+    test(
+        'should throw ErrorServerFoundException when response code is other than 200',
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/top_rated?$API_KEY')))
@@ -109,7 +110,7 @@ void main() {
       // act
       final call = dataSource.fetchTopRatedAllMovie();
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
@@ -137,14 +138,14 @@ void main() {
       // act
       final call = dataSource.fetchMovieDataDetail(tId);
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
   group('get movie recommendations', () {
     final tMovieList = MovieResponse.fromJson(
             json.decode(readJson('dummy_data/movie_recommendations.json')))
-        .movieList;
+        .allMovie;
     final tId = 1;
 
     test('should return list of Movie Model when the response code is 200',
@@ -169,14 +170,14 @@ void main() {
       // act
       final call = dataSource.fetchMovieDataRecommendations(tId);
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
   group('search movies', () {
     final tSearchResult = MovieResponse.fromJson(
             json.decode(readJson('dummy_data/search_spiderman_movie.json')))
-        .movieList;
+        .allMovie;
     final tQuery = 'Spiderman';
 
     test('should return list of movies when response code is 200', () async {
@@ -191,7 +192,8 @@ void main() {
       expect(result, tSearchResult);
     });
 
-    test('should throw ServerException when response code is other than 200',
+    test(
+        'should throw ErrorServerFoundException when response code is other than 200',
         () async {
       // arrange
       when(mockHttpClient
@@ -200,7 +202,7 @@ void main() {
       // act
       final call = dataSource.findAllMovies(tQuery);
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 }

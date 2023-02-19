@@ -26,8 +26,8 @@ class TvSeriesDetailCubit extends Cubit<TvSeriesDetailState> {
     required this.saveWatchlist,
     required this.deleteFromWatchList,
   }) : super(TvSeriesDetailState(
-          tvSeriesDetailState: RequestState.Empty,
-          tvSeriesDetail: TvDetails(
+          stateAllTvSeriesDetail: RequestState.Empty,
+          allTvSeriesDetail: TvDetails(
             adult: false,
             backdropPath: "",
             createdBy: [],
@@ -54,33 +54,35 @@ class TvSeriesDetailCubit extends Cubit<TvSeriesDetailState> {
             voteAverage: 0,
             voteCount: 0,
           ),
-          isAddedToWatchlist: false,
-          tvSeriesRecommendations: [],
-          recommendationsState: RequestState.Empty,
-          watchlistMessage: "",
+          isAddedToWatchListorNot: false,
+          allTvSeriesRecommendations: [],
+          stateAllRecommendationTvSeries: RequestState.Empty,
+          allWatchedListMessage: "",
           message: "",
         ));
 
   Future<void> fetchTvSeriesDetail(int id) async {
-    emit(state.copyWith(tvSeriesDetailState: RequestState.Loading));
+    emit(state.copyWith(stateAllTvSeriesDetail: RequestState.Loading));
     final detailResult = await getTvSeriesDetail.execute(id);
     final recommendationsResult =
         await fetchTvSeriesRecommendationsData.execute(id);
     detailResult.fold((failure) {
       emit(state.copyWith(
-          tvSeriesDetailState: RequestState.Error, message: failure.message));
+          stateAllTvSeriesDetail: RequestState.Error,
+          message: failure.message));
     }, (detailResult) {
       emit(state.copyWith(
-        recommendationsState: RequestState.Loading,
-        tvSeriesDetailState: RequestState.Loaded,
-        tvSeriesDetail: detailResult,
+        stateAllRecommendationTvSeries: RequestState.Loading,
+        stateAllTvSeriesDetail: RequestState.Loaded,
+        allTvSeriesDetail: detailResult,
       ));
       recommendationsResult.fold((failure) {
-        emit(state.copyWith(recommendationsState: RequestState.Error));
+        emit(
+            state.copyWith(stateAllRecommendationTvSeries: RequestState.Error));
       }, (recommendationsResult) {
         emit(state.copyWith(
-          recommendationsState: RequestState.Loaded,
-          tvSeriesRecommendations: recommendationsResult,
+          stateAllRecommendationTvSeries: RequestState.Loaded,
+          allTvSeriesRecommendations: recommendationsResult,
         ));
       });
     });
@@ -88,15 +90,15 @@ class TvSeriesDetailCubit extends Cubit<TvSeriesDetailState> {
 
   Future<void> loadWatchlistStatus(int id) async {
     final result = await getWatchListStatus.execute(id);
-    emit(state.copyWith(isAddedToWatchlist: result));
+    emit(state.copyWith(isAddedToWatchListorNot: result));
   }
 
   Future<void> addWatchlist(TvDetails tvSeries) async {
     final result = await saveWatchlist.execute(tvSeries);
     result.fold((failure) {
-      emit(state.copyWith(watchlistMessage: failure.message));
+      emit(state.copyWith(allWatchedListMessage: failure.message));
     }, (result) {
-      emit(state.copyWith(watchlistMessage: result));
+      emit(state.copyWith(allWatchedListMessage: result));
     });
 
     await loadWatchlistStatus(tvSeries.id);
@@ -105,9 +107,9 @@ class TvSeriesDetailCubit extends Cubit<TvSeriesDetailState> {
   Future<void> removeFromWatchlist(TvDetails tvSeries) async {
     final result = await deleteFromWatchList.execute(tvSeries);
     result.fold((failure) {
-      emit(state.copyWith(watchlistMessage: failure.message));
+      emit(state.copyWith(allWatchedListMessage: failure.message));
     }, (result) {
-      emit(state.copyWith(watchlistMessage: result));
+      emit(state.copyWith(allWatchedListMessage: result));
     });
 
     await loadWatchlistStatus(tvSeries.id);

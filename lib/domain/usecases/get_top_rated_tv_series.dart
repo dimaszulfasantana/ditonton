@@ -9,7 +9,7 @@ class GetTopRatedTvSeries {
     required this.tvSeriesRepository,
   });
 
-  Future<Either<Failure, List<TvSeries>>> execute() {
+  Future<Either<FailureException, List<TvSeries>>> execute() {
     return tvSeriesRepository.fetchTopRatedTvSeriesData();
   }
 }

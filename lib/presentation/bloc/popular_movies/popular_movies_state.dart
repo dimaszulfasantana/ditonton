@@ -3,32 +3,33 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 class PopularMoviesState extends Equatable {
-  final RequestState popularMoviesState;
-  final List<Movie> popularMovies;
+  final RequestState statePopularAllMoviesData;
+  final List<Movie> allPopularMoviesData;
   final String message;
 
   PopularMoviesState({
-    required this.popularMoviesState,
-    required this.popularMovies,
+    required this.statePopularAllMoviesData,
+    required this.allPopularMoviesData,
     required this.message,
   });
 
   PopularMoviesState copyWith({
-    RequestState? popularMoviesState,
-    List<Movie>? popularMovies,
+    RequestState? statePopularAllMoviesData,
+    List<Movie>? allPopularMoviesData,
     String? message,
   }) {
     return PopularMoviesState(
-      popularMoviesState: popularMoviesState ?? this.popularMoviesState,
-      popularMovies: popularMovies ?? this.popularMovies,
+      statePopularAllMoviesData:
+          statePopularAllMoviesData ?? this.statePopularAllMoviesData,
+      allPopularMoviesData: allPopularMoviesData ?? this.allPopularMoviesData,
       message: message ?? this.message,
     );
   }
 
   @override
   List<Object?> get props => [
-        popularMoviesState,
-        popularMovies,
+        statePopularAllMoviesData,
+        allPopularMoviesData,
         message,
       ];
 }

@@ -9,17 +9,20 @@ class TopRatedTvSeriesCubit extends Cubit<TopRatedTvSeriesState> {
   TopRatedTvSeriesCubit({
     required this.fetchTopRatedTvSeriesData,
   }) : super(TopRatedTvSeriesState(
-            topRatedState: RequestState.Empty, topRatedList: [], message: ''));
+            stateTopRatedTvSeries: RequestState.Empty,
+            allTopRatedList: [],
+            message: ''));
 
   Future<void> fetchTopRatedTvSeries() async {
-    emit(state.copyWith(topRatedState: RequestState.Loading, topRatedList: []));
+    emit(state.copyWith(
+        stateTopRatedTvSeries: RequestState.Loading, allTopRatedList: []));
     final result = await fetchTopRatedTvSeriesData.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          topRatedState: RequestState.Error, message: failure.message));
+          stateTopRatedTvSeries: RequestState.Error, message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          topRatedState: RequestState.Loaded, topRatedList: result));
+          stateTopRatedTvSeries: RequestState.Loaded, allTopRatedList: result));
     });
   }
 }

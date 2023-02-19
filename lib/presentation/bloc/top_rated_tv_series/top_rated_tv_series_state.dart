@@ -3,32 +3,33 @@ import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:equatable/equatable.dart';
 
 class TopRatedTvSeriesState extends Equatable {
-  final RequestState topRatedState;
-  final List<TvSeries> topRatedList;
+  final RequestState stateTopRatedTvSeries;
+  final List<TvSeries> allTopRatedList;
   final String message;
 
   TopRatedTvSeriesState({
-    required this.topRatedState,
-    required this.topRatedList,
+    required this.stateTopRatedTvSeries,
+    required this.allTopRatedList,
     required this.message,
   });
 
   TopRatedTvSeriesState copyWith({
-    RequestState? topRatedState,
-    List<TvSeries>? topRatedList,
+    RequestState? stateTopRatedTvSeries,
+    List<TvSeries>? allTopRatedList,
     String? message,
   }) {
     return TopRatedTvSeriesState(
-      topRatedState: topRatedState ?? this.topRatedState,
-      topRatedList: topRatedList ?? this.topRatedList,
+      stateTopRatedTvSeries:
+          stateTopRatedTvSeries ?? this.stateTopRatedTvSeries,
+      allTopRatedList: allTopRatedList ?? this.allTopRatedList,
       message: message ?? this.message,
     );
   }
 
   @override
   List<Object?> get props => [
-        topRatedState,
-        topRatedList,
+        stateTopRatedTvSeries,
+        allTopRatedList,
         message,
       ];
 }

@@ -86,12 +86,12 @@ void main() {
         () async {
       // arrange
       when(mockRemoteDataSource.fetchNowPlayingAllMovie())
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchNowPlayingAllMovie();
       // assert
       verify(mockRemoteDataSource.fetchNowPlayingAllMovie());
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test(
@@ -104,8 +104,10 @@ void main() {
       final result = await repository.fetchNowPlayingAllMovie();
       // assert
       verify(mockRemoteDataSource.fetchNowPlayingAllMovie());
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
@@ -128,11 +130,11 @@ void main() {
         () async {
       // arrange
       when(mockRemoteDataSource.fetchPopularAllMovie())
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchPopularAllMovie();
       // assert
-      expect(result, Left(ServerFailure('')));
+      expect(result, Left(FailureServerException('')));
     });
 
     test(
@@ -144,8 +146,8 @@ void main() {
       // act
       final result = await repository.fetchPopularAllMovie();
       // assert
-      expect(
-          result, Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          Left(FailureConnectionException('Failed to connect to the network')));
     });
   });
 
@@ -163,19 +165,20 @@ void main() {
       expect(resultList, tMovieList);
     });
 
-    test('should return ServerFailure when call to data source is unsuccessful',
+    test(
+        'should return FailureServerException when call to data source is unsuccessful',
         () async {
       // arrange
       when(mockRemoteDataSource.fetchTopRatedAllMovie())
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchTopRatedAllMovie();
       // assert
-      expect(result, Left(ServerFailure('')));
+      expect(result, Left(FailureServerException('')));
     });
 
     test(
-        'should return ConnectionFailure when device is not connected to the internet',
+        'should return FailureConnectionException when device is not connected to the internet',
         () async {
       // arrange
       when(mockRemoteDataSource.fetchTopRatedAllMovie())
@@ -183,8 +186,8 @@ void main() {
       // act
       final result = await repository.fetchTopRatedAllMovie();
       // assert
-      expect(
-          result, Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          Left(FailureConnectionException('Failed to connect to the network')));
     });
   });
 
@@ -228,16 +231,16 @@ void main() {
     });
 
     test(
-        'should return Server Failure when the call to remote data source is unsuccessful',
+        'should return Server FailureException when the call to remote data source is unsuccessful',
         () async {
       // arrange
       when(mockRemoteDataSource.fetchMovieDataDetail(tId))
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchMovieDataDetail(tId);
       // assert
       verify(mockRemoteDataSource.fetchMovieDataDetail(tId));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test(
@@ -250,8 +253,10 @@ void main() {
       final result = await repository.fetchMovieDataDetail(tId);
       // assert
       verify(mockRemoteDataSource.fetchMovieDataDetail(tId));
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
@@ -278,12 +283,12 @@ void main() {
         () async {
       // arrange
       when(mockRemoteDataSource.fetchMovieDataRecommendations(tId))
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.fetchMovieDataRecommendations(tId);
       // assertbuild runner
       verify(mockRemoteDataSource.fetchMovieDataRecommendations(tId));
-      expect(result, equals(Left(ServerFailure(''))));
+      expect(result, equals(Left(FailureServerException(''))));
     });
 
     test(
@@ -296,8 +301,10 @@ void main() {
       final result = await repository.fetchMovieDataRecommendations(tId);
       // assert
       verify(mockRemoteDataSource.fetchMovieDataRecommendations(tId));
-      expect(result,
-          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+      expect(
+          result,
+          equals(Left(
+              FailureConnectionException('Failed to connect to the network'))));
     });
   });
 
@@ -317,19 +324,20 @@ void main() {
       expect(resultList, tMovieList);
     });
 
-    test('should return ServerFailure when call to data source is unsuccessful',
+    test(
+        'should return FailureServerException when call to data source is unsuccessful',
         () async {
       // arrange
       when(mockRemoteDataSource.findAllMovies(tQuery))
-          .thenThrow(ServerException());
+          .thenThrow(ErrorServerFoundException());
       // act
       final result = await repository.findAllMovies(tQuery);
       // assert
-      expect(result, Left(ServerFailure('')));
+      expect(result, Left(FailureServerException('')));
     });
 
     test(
-        'should return ConnectionFailure when device is not connected to the internet',
+        'should return FailureConnectionException when device is not connected to the internet',
         () async {
       // arrange
       when(mockRemoteDataSource.findAllMovies(tQuery))
@@ -337,8 +345,8 @@ void main() {
       // act
       final result = await repository.findAllMovies(tQuery);
       // assert
-      expect(
-          result, Left(ConnectionFailure('Failed to connect to the network')));
+      expect(result,
+          Left(FailureConnectionException('Failed to connect to the network')));
     });
   });
 
@@ -353,14 +361,15 @@ void main() {
       expect(result, Right('Added to Watchlist'));
     });
 
-    test('should return DatabaseFailure when saving unsuccessful', () async {
+    test('should return FailureDatabaseException when saving unsuccessful',
+        () async {
       // arrange
       when(mockLocalDataSource.addToWatchList(testMovieTable))
-          .thenThrow(DatabaseException('Failed to add watchlist'));
+          .thenThrow(ErrorDatabaseFoundException('Failed to add watchlist'));
       // act
       final result = await repository.saveWatchlist(testMovieDetail);
       // assert
-      expect(result, Left(DatabaseFailure('Failed to add watchlist')));
+      expect(result, Left(FailureDatabaseException('Failed to add watchlist')));
     });
   });
 
@@ -375,14 +384,16 @@ void main() {
       expect(result, Right('Removed from watchlist'));
     });
 
-    test('should return DatabaseFailure when remove unsuccessful', () async {
+    test('should return FailureDatabaseException when remove unsuccessful',
+        () async {
       // arrange
       when(mockLocalDataSource.deleteFromWatchList(testMovieTable))
-          .thenThrow(DatabaseException('Failed to remove watchlist'));
+          .thenThrow(ErrorDatabaseFoundException('Failed to remove watchlist'));
       // act
       final result = await repository.deleteFromWatchList(testMovieDetail);
       // assert
-      expect(result, Left(DatabaseFailure('Failed to remove watchlist')));
+      expect(
+          result, Left(FailureDatabaseException('Failed to remove watchlist')));
     });
   });
 
@@ -393,7 +404,7 @@ void main() {
       when(mockLocalDataSource.fetchMovieDataById(tId))
           .thenAnswer((_) async => null);
       // act
-      final result = await repository.isAddedToWatchlist(tId);
+      final result = await repository.isAddedToWatchListorNot(tId);
       // assert
       expect(result, false);
     });
@@ -402,10 +413,10 @@ void main() {
   group('get watchlist movies', () {
     test('should return list of Movies', () async {
       // arrange
-      when(mockLocalDataSource.fetchWatchListAllMovie())
+      when(mockLocalDataSource.getAllWatchListMovie())
           .thenAnswer((_) async => [testMovieTable]);
       // act
-      final result = await repository.fetchWatchListAllMovie();
+      final result = await repository.getAllWatchListMovie();
       // assert
       final resultList = result.getOrElse(() => []);
       expect(resultList, [testWatchlistMovie]);

@@ -9,7 +9,7 @@ class SearchTvSeries {
     required this.tvSeriesRepository,
   });
 
-  Future<Either<Failure, List<TvSeries>>> execute(String query) {
+  Future<Either<FailureException, List<TvSeries>>> execute(String query) {
     return tvSeriesRepository.fetchSearchTvSeriesData(query);
   }
 }

@@ -11,8 +11,8 @@ class SearchTvSeriesBloc
     required this.searchTvSeries,
   }) : super(
           SearchTvSeriesState(
-            searchTvSeriesState: RequestState.Empty,
-            tvSeriesList: [],
+            stateSearchTvSeries: RequestState.Empty,
+            allTvSeriesList: [],
             message: '',
           ),
         ) {
@@ -22,14 +22,14 @@ class SearchTvSeriesBloc
   Future<void> _fetchSearchedTvSeries(
       SearchTvSeriesEvent event, Emitter<SearchTvSeriesState> emit) async {
     if (event is SearchTvSeriesFetchEvent) {
-      emit(state.copyWith(searchTvSeriesState: RequestState.Loading));
+      emit(state.copyWith(stateSearchTvSeries: RequestState.Loading));
       final result = await searchTvSeries.execute(event.query);
       result.fold((failure) {
         emit(state.copyWith(
-            searchTvSeriesState: RequestState.Error, message: failure.message));
+            stateSearchTvSeries: RequestState.Error, message: failure.message));
       }, (result) {
         emit(state.copyWith(
-            searchTvSeriesState: RequestState.Loaded, tvSeriesList: result));
+            stateSearchTvSeries: RequestState.Loaded, allTvSeriesList: result));
       });
     }
   }

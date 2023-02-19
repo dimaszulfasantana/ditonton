@@ -7,53 +7,56 @@ class TvSeriesDetailState extends Equatable {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  final RequestState tvSeriesDetailState;
-  final RequestState recommendationsState;
-  final TvDetails tvSeriesDetail;
-  final List<TvSeries> tvSeriesRecommendations;
-  final String watchlistMessage;
-  final bool isAddedToWatchlist;
+  final RequestState stateAllTvSeriesDetail;
+  final RequestState stateAllRecommendationTvSeries;
+  final TvDetails allTvSeriesDetail;
+  final List<TvSeries> allTvSeriesRecommendations;
+  final String allWatchedListMessage;
+  final bool isAddedToWatchListorNot;
   final String message;
 
   TvSeriesDetailState({
-    required this.tvSeriesDetailState,
-    required this.recommendationsState,
-    required this.tvSeriesDetail,
-    required this.tvSeriesRecommendations,
-    required this.watchlistMessage,
-    required this.isAddedToWatchlist,
+    required this.stateAllTvSeriesDetail,
+    required this.stateAllRecommendationTvSeries,
+    required this.allTvSeriesDetail,
+    required this.allTvSeriesRecommendations,
+    required this.allWatchedListMessage,
+    required this.isAddedToWatchListorNot,
     required this.message,
   });
 
   TvSeriesDetailState copyWith({
-    RequestState? tvSeriesDetailState,
-    RequestState? recommendationsState,
-    TvDetails? tvSeriesDetail,
-    List<TvSeries>? tvSeriesRecommendations,
-    String? watchlistMessage,
-    bool? isAddedToWatchlist,
+    RequestState? stateAllTvSeriesDetail,
+    RequestState? stateAllRecommendationTvSeries,
+    TvDetails? allTvSeriesDetail,
+    List<TvSeries>? allTvSeriesRecommendations,
+    String? allWatchedListMessage,
+    bool? isAddedToWatchListorNot,
     String? message,
   }) {
     return TvSeriesDetailState(
-      tvSeriesDetailState: tvSeriesDetailState ?? this.tvSeriesDetailState,
-      recommendationsState: recommendationsState ?? this.recommendationsState,
-      tvSeriesDetail: tvSeriesDetail ?? this.tvSeriesDetail,
-      tvSeriesRecommendations:
-          tvSeriesRecommendations ?? this.tvSeriesRecommendations,
-      watchlistMessage: watchlistMessage ?? this.watchlistMessage,
-      isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,
+      stateAllTvSeriesDetail:
+          stateAllTvSeriesDetail ?? this.stateAllTvSeriesDetail,
+      stateAllRecommendationTvSeries:
+          stateAllRecommendationTvSeries ?? this.stateAllRecommendationTvSeries,
+      allTvSeriesDetail: allTvSeriesDetail ?? this.allTvSeriesDetail,
+      allTvSeriesRecommendations:
+          allTvSeriesRecommendations ?? this.allTvSeriesRecommendations,
+      allWatchedListMessage:
+          allWatchedListMessage ?? this.allWatchedListMessage,
+      isAddedToWatchListorNot: isAddedToWatchListorNot ?? this.isAddedToWatchListorNot,
       message: message ?? this.message,
     );
   }
 
   @override
   List<Object?> get props => [
-        tvSeriesDetailState,
-        recommendationsState,
-        tvSeriesDetail,
-        tvSeriesRecommendations,
-        watchlistMessage,
-        isAddedToWatchlist,
+        stateAllTvSeriesDetail,
+        stateAllRecommendationTvSeries,
+        allTvSeriesDetail,
+        allTvSeriesRecommendations,
+        allWatchedListMessage,
+        isAddedToWatchListorNot,
         message,
       ];
 }

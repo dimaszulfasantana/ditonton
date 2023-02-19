@@ -10,7 +10,7 @@ class GetTvSeriesRecommendations {
     required this.tvSeriesRepository,
   });
 
-  Future<Either<Failure, List<TvSeries>>> execute(int seriesId) async {
+  Future<Either<FailureException, List<TvSeries>>> execute(int seriesId) async {
     return await tvSeriesRepository.fetchTvSeriesRecommendationsData(seriesId);
   }
 }

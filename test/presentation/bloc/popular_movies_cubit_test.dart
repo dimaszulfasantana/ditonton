@@ -51,34 +51,34 @@ void main() {
       wait: Duration(milliseconds: 100),
       expect: () => [
             bloc.state.copyWith(
-              popularMoviesState: RequestState.Loading,
-              popularMovies: [],
+              statePopularAllMoviesData: RequestState.Loading,
+              allPopularMoviesData: [],
             ),
             bloc.state.copyWith(
-              popularMoviesState: RequestState.Loaded,
-              popularMovies: tMovieList,
+              statePopularAllMoviesData: RequestState.Loaded,
+              allPopularMoviesData: tMovieList,
             ),
           ]);
 
   blocTest<PopularMoviesCubit, PopularMoviesState>(
       'should return error when data is unsuccessful',
       build: () {
-        when(mockGetPopularMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetPopularMovies.execute()).thenAnswer((_) async =>
+            Left(FailureServerException('Server FailureException')));
         return bloc;
       },
       act: (cubit) => cubit.fetchPopularMovies(),
       wait: Duration(milliseconds: 100),
       expect: () => [
             bloc.state.copyWith(
-              popularMoviesState: RequestState.Loading,
-              popularMovies: [],
+              statePopularAllMoviesData: RequestState.Loading,
+              allPopularMoviesData: [],
               message: '',
             ),
             bloc.state.copyWith(
-              popularMoviesState: RequestState.Error,
-              popularMovies: [],
-              message: 'Server Failure',
+              statePopularAllMoviesData: RequestState.Error,
+              allPopularMoviesData: [],
+              message: 'Server FailureException',
             ),
           ]);
 }

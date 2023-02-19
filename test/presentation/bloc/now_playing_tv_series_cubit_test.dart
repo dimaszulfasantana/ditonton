@@ -42,14 +42,14 @@ void main() {
       voteAverage: 1,
       voteCount: 1);
 
-  final tvSeriesList = <TvSeries>[tvSeries];
+  final allTvSeriesList = <TvSeries>[tvSeries];
 
   group('Now Playing Tv Series', () {
     blocTest<NowPlayingTvSeriesCubit, NowPlayingTvSeriesState>(
       'should return data from usecase',
       build: () {
         when(mockGetNowPlayingTvSeries.execute())
-            .thenAnswer((_) async => Right(tvSeriesList));
+            .thenAnswer((_) async => Right(allTvSeriesList));
         return bloc;
       },
       act: (cubit) => cubit.fetchNowPlayingTvSeries(),
@@ -62,18 +62,18 @@ void main() {
         'should change state to loading then loaded when function called',
         build: () {
           when(mockGetNowPlayingTvSeries.execute())
-              .thenAnswer((_) async => Right(tvSeriesList));
+              .thenAnswer((_) async => Right(allTvSeriesList));
           return bloc;
         },
         act: (cubit) => cubit.fetchNowPlayingTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loading,
-                nowPlayingList: [],
+                stateNowPlaying: RequestState.Loading,
+                allNowPlayingList: [],
               ),
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loaded,
-                nowPlayingList: tvSeriesList,
+                stateNowPlaying: RequestState.Loaded,
+                allNowPlayingList: allTvSeriesList,
               )
             ]);
 
@@ -81,17 +81,17 @@ void main() {
         'should return failure and error state when fetch now playing failed',
         build: () {
           when(mockGetNowPlayingTvSeries.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchNowPlayingTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loading,
+                stateNowPlaying: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Error,
+                stateNowPlaying: RequestState.Error,
                 message: 'Failed',
               )
             ]);

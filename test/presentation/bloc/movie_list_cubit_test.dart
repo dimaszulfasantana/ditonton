@@ -75,32 +75,32 @@ void main() {
         wait: Duration(milliseconds: 100),
         expect: () => [
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loading,
-                nowPlayingList: [],
+                stateNowPlaying: RequestState.Loading,
+                allNowPlayingList: [],
               ),
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loaded,
-                nowPlayingList: tMovieList,
+                stateNowPlaying: RequestState.Loaded,
+                allNowPlayingList: tMovieList,
               ),
             ]);
 
     blocTest<MovieListCubit, MovieListState>(
         'should return error when data is unsuccessful',
         build: () {
-          when(mockGetNowPlayingMovies.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          when(mockGetNowPlayingMovies.execute()).thenAnswer((_) async =>
+              Left(FailureServerException('Server FailureException')));
           return bloc;
         },
         act: (cubit) => cubit.fetchNowPlayingMovies(),
         wait: Duration(milliseconds: 100),
         expect: () => [
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loading,
-                nowPlayingList: [],
+                stateNowPlaying: RequestState.Loading,
+                allNowPlayingList: [],
               ),
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Error,
-                nowPlayingList: [],
+                stateNowPlaying: RequestState.Error,
+                allNowPlayingList: [],
               ),
             ]);
   });
@@ -117,32 +117,32 @@ void main() {
         wait: Duration(milliseconds: 100),
         expect: () => [
               bloc.state.copyWith(
-                popularState: RequestState.Loading,
-                popularList: [],
+                statePopularTvSeries: RequestState.Loading,
+                allPopularList: [],
               ),
               bloc.state.copyWith(
-                popularState: RequestState.Loaded,
-                popularList: tMovieList,
+                statePopularTvSeries: RequestState.Loaded,
+                allPopularList: tMovieList,
               ),
             ]);
 
     blocTest<MovieListCubit, MovieListState>(
         'should return error when data is unsuccessful',
         build: () {
-          when(mockGetPopularMovies.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          when(mockGetPopularMovies.execute()).thenAnswer((_) async =>
+              Left(FailureServerException('Server FailureException')));
           return bloc;
         },
         act: (cubit) => cubit.fetchPopularMovies(),
         wait: Duration(milliseconds: 100),
         expect: () => [
               bloc.state.copyWith(
-                popularState: RequestState.Loading,
-                popularList: [],
+                statePopularTvSeries: RequestState.Loading,
+                allPopularList: [],
               ),
               bloc.state.copyWith(
-                popularState: RequestState.Error,
-                popularList: [],
+                statePopularTvSeries: RequestState.Error,
+                allPopularList: [],
               ),
             ]);
   });
@@ -159,32 +159,32 @@ void main() {
         wait: Duration(milliseconds: 100),
         expect: () => [
               bloc.state.copyWith(
-                topRatedState: RequestState.Loading,
-                topRatedList: [],
+                stateTopRatedTvSeries: RequestState.Loading,
+                allTopRatedList: [],
               ),
               bloc.state.copyWith(
-                topRatedState: RequestState.Loaded,
-                topRatedList: tMovieList,
+                stateTopRatedTvSeries: RequestState.Loaded,
+                allTopRatedList: tMovieList,
               ),
             ]);
 
     blocTest<MovieListCubit, MovieListState>(
         'should return error when data is unsuccessful',
         build: () {
-          when(mockGetTopRatedMovies.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          when(mockGetTopRatedMovies.execute()).thenAnswer((_) async =>
+              Left(FailureServerException('Server FailureException')));
           return bloc;
         },
         act: (cubit) => cubit.fetchTopRatedMovies(),
         wait: Duration(milliseconds: 100),
         expect: () => [
               bloc.state.copyWith(
-                topRatedState: RequestState.Loading,
-                topRatedList: [],
+                stateTopRatedTvSeries: RequestState.Loading,
+                allTopRatedList: [],
               ),
               bloc.state.copyWith(
-                topRatedState: RequestState.Error,
-                topRatedList: [],
+                stateTopRatedTvSeries: RequestState.Error,
+                allTopRatedList: [],
               ),
             ]);
   });

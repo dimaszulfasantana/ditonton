@@ -36,17 +36,17 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     return Scaffold(
       body: BlocBuilder<TvSeriesDetailCubit, TvSeriesDetailState>(
         builder: (context, state) {
-          if (state.tvSeriesDetailState == RequestState.Loading) {
+          if (state.stateAllTvSeriesDetail == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state.tvSeriesDetailState == RequestState.Loaded) {
-            final tvSeries = state.tvSeriesDetail;
+          } else if (state.stateAllTvSeriesDetail == RequestState.Loaded) {
+            final tvSeries = state.allTvSeriesDetail;
             return SafeArea(
                 child: DetailContent(
               tvDetails: tvSeries,
-              isAddedToWatchlist: state.isAddedToWatchlist,
-              recommendations: state.tvSeriesRecommendations,
+              isAddedToWatchListorNot: state.isAddedToWatchListorNot,
+              recommendations: state.allTvSeriesRecommendations,
             ));
           } else {
             return Text(state.message);
@@ -59,12 +59,12 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final TvDetails? tvDetails;
-  final bool isAddedToWatchlist;
+  final bool isAddedToWatchListorNot;
   final List<TvSeries> recommendations;
   const DetailContent({
     Key? key,
     required this.tvDetails,
-    required this.isAddedToWatchlist,
+    required this.isAddedToWatchListorNot,
     required this.recommendations,
   }) : super(key: key);
 
@@ -86,7 +86,7 @@ class DetailContent extends StatelessWidget {
           child: DraggableScrollableSheet(builder: (context, scrollController) {
             return Container(
               decoration: BoxDecoration(
-                color: kRichBlack,
+                color: colourNavy,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
               ),
               padding: const EdgeInsets.only(
@@ -113,11 +113,11 @@ class DetailContent extends StatelessWidget {
                         children: [
                           Text(
                             tvDetails?.name ?? "",
-                            style: kHeading5,
+                            style: headlineBig,
                           ),
                           ElevatedButton(
                             onPressed: () async {
-                              if (!isAddedToWatchlist) {
+                              if (!isAddedToWatchListorNot) {
                                 await context
                                     .read<TvSeriesDetailCubit>()
                                     .addWatchlist(tvDetails!);
@@ -130,7 +130,7 @@ class DetailContent extends StatelessWidget {
                               final message = context
                                   .read<TvSeriesDetailCubit>()
                                   .state
-                                  .watchlistMessage;
+                                  .allWatchedListMessage;
                               if (message ==
                                       TvSeriesDetailCubit
                                           .watchlistAddSuccessMessage ||
@@ -153,7 +153,7 @@ class DetailContent extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                isAddedToWatchlist
+                                isAddedToWatchListorNot
                                     ? Icon(Icons.check)
                                     : Icon(Icons.add),
                                 Text('Watchlist'),
@@ -181,7 +181,7 @@ class DetailContent extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return Icon(
                                     Icons.star,
-                                    color: kMikadoYellow,
+                                    color: colourDarkYellow,
                                   );
                                 },
                                 itemSize: 24,
@@ -196,7 +196,7 @@ class DetailContent extends StatelessWidget {
                           ),
                           Text(
                             'Overview',
-                            style: kHeading5,
+                            style: headlineBig,
                           ),
                           Text(
                             tvDetails?.overview ?? "",
@@ -206,16 +206,16 @@ class DetailContent extends StatelessWidget {
                           ),
                           Text(
                             'Recommendations',
-                            style: kHeading6,
+                            style: headLineBigger,
                           ),
                           BlocBuilder<TvSeriesDetailCubit, TvSeriesDetailState>(
                               builder: (context, state) {
-                            if (state.recommendationsState ==
+                            if (state.stateAllRecommendationTvSeries ==
                                 RequestState.Loading) {
                               return Center(
                                 child: CircularProgressIndicator(),
                               );
-                            } else if (state.recommendationsState ==
+                            } else if (state.stateAllRecommendationTvSeries ==
                                 RequestState.Loaded) {
                               return Container(
                                 height: 150,
@@ -259,7 +259,7 @@ class DetailContent extends StatelessWidget {
                                   itemCount: recommendations.length,
                                 ),
                               );
-                            } else if (state.recommendationsState ==
+                            } else if (state.stateAllRecommendationTvSeries ==
                                 RequestState.Error) {
                               return Text(state.message);
                             } else {
@@ -278,7 +278,7 @@ class DetailContent extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: kRichBlack,
+            backgroundColor: colourNavy,
             foregroundColor: Colors.white,
             child: IconButton(
               icon: Icon(Icons.arrow_back),

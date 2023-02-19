@@ -47,12 +47,12 @@ void main() {
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(mockCubit.stream).thenAnswer((_) => Stream.value(PopularMoviesState(
-        popularMoviesState: RequestState.Loading,
-        popularMovies: [],
+        statePopularAllMoviesData: RequestState.Loading,
+        allPopularMoviesData: [],
         message: '')));
     when(mockCubit.state).thenReturn(PopularMoviesState(
-        popularMoviesState: RequestState.Loading,
-        popularMovies: [],
+        statePopularAllMoviesData: RequestState.Loading,
+        allPopularMoviesData: [],
         message: ''));
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
@@ -68,12 +68,12 @@ void main() {
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
     when(mockCubit.stream).thenAnswer((_) => Stream.value(PopularMoviesState(
-        popularMoviesState: RequestState.Loaded,
-        popularMovies: tMovieList,
+        statePopularAllMoviesData: RequestState.Loaded,
+        allPopularMoviesData: tMovieList,
         message: '')));
     when(mockCubit.state).thenReturn(PopularMoviesState(
-        popularMoviesState: RequestState.Loaded,
-        popularMovies: tMovieList,
+        statePopularAllMoviesData: RequestState.Loaded,
+        allPopularMoviesData: tMovieList,
         message: ''));
 
     final listViewFinder = find.byType(ListView);
@@ -86,12 +86,12 @@ void main() {
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
     when(mockCubit.stream).thenAnswer((_) => Stream.value(PopularMoviesState(
-        popularMoviesState: RequestState.Error,
-        popularMovies: [],
+        statePopularAllMoviesData: RequestState.Error,
+        allPopularMoviesData: [],
         message: 'Error message')));
     when(mockCubit.state).thenReturn(PopularMoviesState(
-        popularMoviesState: RequestState.Error,
-        popularMovies: [],
+        statePopularAllMoviesData: RequestState.Error,
+        allPopularMoviesData: [],
         message: 'Error message'));
 
     final textFinder = find.byKey(Key('error_message'));

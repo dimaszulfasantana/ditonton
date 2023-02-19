@@ -9,7 +9,7 @@ class GetTvSeriesWatchlist {
     required this.tvSeriesRepository,
   });
 
-  Future<Either<Failure, List<TvSeries>>> execute() async {
+  Future<Either<FailureException, List<TvSeries>>> execute() async {
     return await tvSeriesRepository.fetchWatchListTvDataSeries();
   }
 }

@@ -128,8 +128,8 @@ void _registerDomains() {
   );
   locator.registerFactory(
     () => WatchlistCubit(
-      fetchWatchListAllMovie: locator(),
-      getTvSeriesWatchlist: locator(),
+      getAllWatchListMovie: locator(),
+      getAllTvSeriesWatchlist: locator(),
     ),
   );
 

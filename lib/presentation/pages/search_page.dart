@@ -56,23 +56,24 @@ class _SearchPageState extends State<SearchPage> {
             SizedBox(height: 16),
             Text(
               'Search Result',
-              style: kHeading6,
+              style: headLineBigger,
             ),
             typeHelper == TypeHelper.Movies
                 ? BlocBuilder<SearchMovieBloc, SearchMovieState>(
                     builder: (context, state) {
-                      if (state.searchMovieState == RequestState.Loading) {
+                      if (state.stateSearchMovieDataState ==
+                          RequestState.Loading) {
                         return Center(
                           child: CircularProgressIndicator(),
                         );
-                      } else if (state.searchMovieState ==
+                      } else if (state.stateSearchMovieDataState ==
                           RequestState.Loaded) {
-                        final result = state.moviesList;
+                        final result = state.allMovieList;
                         return Expanded(
                           child: ListView.builder(
                             padding: const EdgeInsets.all(8),
                             itemBuilder: (context, index) {
-                              final movie = state.moviesList[index];
+                              final movie = state.allMovieList[index];
                               return MovieCard(movie);
                             },
                             itemCount: result.length,
@@ -87,18 +88,18 @@ class _SearchPageState extends State<SearchPage> {
                   )
                 : BlocBuilder<SearchTvSeriesBloc, SearchTvSeriesState>(
                     builder: (context, state) {
-                    if (state.searchTvSeriesState == RequestState.Loading) {
+                    if (state.stateSearchTvSeries == RequestState.Loading) {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
-                    } else if (state.searchTvSeriesState ==
+                    } else if (state.stateSearchTvSeries ==
                         RequestState.Loaded) {
-                      final result = state.tvSeriesList;
+                      final result = state.allTvSeriesList;
                       return Expanded(
                         child: ListView.builder(
                           padding: const EdgeInsets.all(8),
                           itemBuilder: (context, index) {
-                            final tvSeries = state.tvSeriesList[index];
+                            final tvSeries = state.allTvSeriesList[index];
                             return TvSeriesCardList(tvSeries: tvSeries);
                           },
                           itemCount: result.length,

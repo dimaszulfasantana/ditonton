@@ -38,7 +38,7 @@ void main() {
       expect(result, equals(tTvSeriesList));
     });
 
-    test('should throw ServerException when the response code is 404',
+    test('should throw ErrorServerFoundException when the response code is 404',
         () async {
       // arrange
       when(mockHttpClient.get(
@@ -47,7 +47,7 @@ void main() {
       // act
       final call = dataSource.fetchNowPlayingTvSeriesData();
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
@@ -68,7 +68,7 @@ void main() {
       expect(result, equals(tTvSeriesList));
     });
 
-    test('should throw ServerException when the response code is 404',
+    test('should throw ErrorServerFoundException when the response code is 404',
         () async {
       // arrange
       when(mockHttpClient
@@ -77,7 +77,7 @@ void main() {
       // act
       final call = dataSource.fetchPopularTvSeriesData();
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
@@ -98,7 +98,7 @@ void main() {
       expect(result, equals(tTvSeriesList));
     });
 
-    test('should throw ServerException when the response code is 404',
+    test('should throw ErrorServerFoundException when the response code is 404',
         () async {
       // arrange
       when(mockHttpClient.get(
@@ -107,12 +107,12 @@ void main() {
       // act
       final call = dataSource.fetchTopRatedTvSeriesData();
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
   group('tv series recommendations', () {
-    final tvSeriesList = TvSeriesResponse.fromJson(json.decode(
+    final allTvSeriesList = TvSeriesResponse.fromJson(json.decode(
             readJson('dummy_data/tvseries/tv_series_recommendations.json')))
         .results;
     final id = 1;
@@ -128,10 +128,11 @@ void main() {
       // act
       final result = await dataSource.fetchTvSeriesRecommendationsData(id);
       // assert
-      expect(result, equals(tvSeriesList));
+      expect(result, equals(allTvSeriesList));
     });
 
-    test('should throw ServerException when the response code id 404 or other',
+    test(
+        'should throw ErrorServerFoundException when the response code id 404 or other',
         () {
       // arrange
       when(mockHttpClient.get(Uri.parse(
@@ -140,7 +141,7 @@ void main() {
       // act
       final call = dataSource.fetchTvSeriesRecommendationsData(id);
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 
@@ -162,7 +163,8 @@ void main() {
       expect(result, searchResult);
     });
 
-    test('should throw ServerException when response code is other than 200',
+    test(
+        'should throw ErrorServerFoundException when response code is other than 200',
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse(
@@ -172,7 +174,7 @@ void main() {
       // act
       final call = dataSource.fetchSearchTvSeriesData(query);
       // assert
-      expect(() => call, throwsA(isA<ServerException>()));
+      expect(() => call, throwsA(isA<ErrorServerFoundException>()));
     });
   });
 }

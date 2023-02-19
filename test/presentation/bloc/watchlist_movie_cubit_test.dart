@@ -23,8 +23,8 @@ void main() {
     mockGetWatchlistMovies = MockGetWatchlistMovies();
     mockGetTvSeriesWatchlist = MockGetTvSeriesWatchlist();
     bloc = WatchlistCubit(
-        fetchWatchListAllMovie: mockGetWatchlistMovies,
-        getTvSeriesWatchlist: mockGetTvSeriesWatchlist);
+        getAllWatchListMovie: mockGetWatchlistMovies,
+        getAllTvSeriesWatchlist: mockGetTvSeriesWatchlist);
   });
 
   final id = 1;
@@ -61,7 +61,7 @@ void main() {
       voteAverage: 1,
       voteCount: 1);
 
-  final tvSeriesList = <TvSeries>[tvSeries];
+  final allTvSeriesList = <TvSeries>[tvSeries];
 
   group('movies watchlist', () {
     blocTest<WatchlistCubit, WatchlistState>('should return data from usecase',
@@ -85,12 +85,12 @@ void main() {
         act: (cubit) => cubit.fetchMoviesWatchlist(),
         expect: () => [
               bloc.state.copyWith(
-                watchlistMovieState: RequestState.Loading,
-                movieList: [],
+                allWatchedMovieState: RequestState.Loading,
+                allMovie: [],
               ),
               bloc.state.copyWith(
-                watchlistMovieState: RequestState.Loaded,
-                movieList: tMovieList,
+                allWatchedMovieState: RequestState.Loaded,
+                allMovie: tMovieList,
               ),
             ]);
 
@@ -98,17 +98,17 @@ void main() {
         'should change state to error when failed',
         build: () {
           when(mockGetWatchlistMovies.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchMoviesWatchlist(),
         expect: () => [
               bloc.state.copyWith(
-                watchlistMovieState: RequestState.Loading,
+                allWatchedMovieState: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                watchlistMovieState: RequestState.Error,
+                allWatchedMovieState: RequestState.Error,
                 message: 'Failed',
               ),
             ]);
@@ -118,7 +118,7 @@ void main() {
     blocTest<WatchlistCubit, WatchlistState>('should return data from usecase',
         build: () {
           when(mockGetTvSeriesWatchlist.execute())
-              .thenAnswer((_) async => Right(tvSeriesList));
+              .thenAnswer((_) async => Right(allTvSeriesList));
           return bloc;
         },
         act: (cubit) => cubit.fetchTvSeriesWatchlist(),
@@ -130,18 +130,18 @@ void main() {
         'should change state to loading then loaded when success',
         build: () {
           when(mockGetTvSeriesWatchlist.execute())
-              .thenAnswer((_) async => Right(tvSeriesList));
+              .thenAnswer((_) async => Right(allTvSeriesList));
           return bloc;
         },
         act: (cubit) => cubit.fetchTvSeriesWatchlist(),
         expect: () => [
               bloc.state.copyWith(
-                watchlistTvSeriesState: RequestState.Loading,
-                tvSeriesList: [],
+                allWatchedListTvSeriesState: RequestState.Loading,
+                allTvSeriesList: [],
               ),
               bloc.state.copyWith(
-                watchlistTvSeriesState: RequestState.Loaded,
-                tvSeriesList: tvSeriesList,
+                allWatchedListTvSeriesState: RequestState.Loaded,
+                allTvSeriesList: allTvSeriesList,
               ),
             ]);
 
@@ -149,17 +149,17 @@ void main() {
         'should change state to error when failed',
         build: () {
           when(mockGetTvSeriesWatchlist.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchTvSeriesWatchlist(),
         expect: () => [
               bloc.state.copyWith(
-                watchlistTvSeriesState: RequestState.Loading,
+                allWatchedListTvSeriesState: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                watchlistTvSeriesState: RequestState.Error,
+                allWatchedListTvSeriesState: RequestState.Error,
                 message: 'Failed',
               ),
             ]);

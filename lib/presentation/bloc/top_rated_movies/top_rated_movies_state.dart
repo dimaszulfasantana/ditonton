@@ -3,32 +3,33 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 class TopRatedMoviesState extends Equatable {
-  final RequestState topRatedMoviesState;
-  final List<Movie> topRatedMovies;
+  final RequestState stateTopRatedAllMovies;
+  final List<Movie> allTopRatedMovie;
   final String message;
 
   TopRatedMoviesState({
-    required this.topRatedMoviesState,
-    required this.topRatedMovies,
+    required this.stateTopRatedAllMovies,
+    required this.allTopRatedMovie,
     required this.message,
   });
 
   TopRatedMoviesState copyWith({
-    RequestState? topRatedMoviesState,
-    List<Movie>? topRatedMovies,
+    RequestState? stateTopRatedAllMovies,
+    List<Movie>? allTopRatedMovie,
     String? message,
   }) {
     return TopRatedMoviesState(
-      topRatedMoviesState: topRatedMoviesState ?? this.topRatedMoviesState,
-      topRatedMovies: topRatedMovies ?? this.topRatedMovies,
+      stateTopRatedAllMovies:
+          stateTopRatedAllMovies ?? this.stateTopRatedAllMovies,
+      allTopRatedMovie: allTopRatedMovie ?? this.allTopRatedMovie,
       message: message ?? this.message,
     );
   }
 
   @override
   List<Object?> get props => [
-        topRatedMoviesState,
-        topRatedMovies,
+        stateTopRatedAllMovies,
+        allTopRatedMovie,
         message,
       ];
 }

@@ -111,18 +111,18 @@ void main() {
       expect: () => [
         bloc.state.copyWith(
           movieDetailState: RequestState.Loading,
-          recommendationsState: RequestState.Empty,
+          stateAllRecommendationTvSeries: RequestState.Empty,
           movieDetail: emptyDetail,
           movieRecommendations: [],
         ),
         bloc.state.copyWith(
-          recommendationsState: RequestState.Loading,
+          stateAllRecommendationTvSeries: RequestState.Loading,
           movieDetailState: RequestState.Loaded,
           movieDetail: testMovieDetail,
           movieRecommendations: [],
         ),
         bloc.state.copyWith(
-          recommendationsState: RequestState.Loaded,
+          stateAllRecommendationTvSeries: RequestState.Loaded,
           movieDetailState: RequestState.Loaded,
           movieDetail: testMovieDetail,
           movieRecommendations: tMovies,
@@ -134,9 +134,9 @@ void main() {
         'should return error when get detail or recommendation movies failed',
         build: () {
           when(mockGetMovieDetail.execute(tId))
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           when(mockGetMovieRecommendations.execute(tId))
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchMovieDetails(tId),
@@ -160,7 +160,7 @@ void main() {
         return bloc;
       },
       act: (cubit) => cubit.loadWatchlistStatus(tId),
-      expect: () => [bloc.state.copyWith(isAddedToWatchlist: true)],
+      expect: () => [bloc.state.copyWith(isAddedToWatchListorNot: true)],
     );
 
     blocTest<MovieDetailCubit, MovieDetailState>(
@@ -202,12 +202,12 @@ void main() {
       verify: (cubit) => mockGetWatchlistStatus.execute(testMovieDetail.id),
       expect: () => [
         bloc.state.copyWith(
-          isAddedToWatchlist: false,
-          watchlistMessage: 'Added to Watchlist',
+          isAddedToWatchListorNot: false,
+          allWatchedListMessage: 'Added to Watchlist',
         ),
         bloc.state.copyWith(
-          isAddedToWatchlist: true,
-          watchlistMessage: 'Added to Watchlist',
+          isAddedToWatchListorNot: true,
+          allWatchedListMessage: 'Added to Watchlist',
         )
       ],
     );
@@ -216,7 +216,7 @@ void main() {
       'should update watchlist status when add watchlist failed',
       build: () {
         when(mockSaveWatchlist.execute(testMovieDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+            .thenAnswer((_) async => Left(FailureDatabaseException('Failed')));
         when(mockGetWatchlistStatus.execute(testMovieDetail.id))
             .thenAnswer((_) async => false);
         return bloc;
@@ -225,8 +225,8 @@ void main() {
       verify: (cubit) => mockGetWatchlistStatus.execute(testMovieDetail.id),
       expect: () => [
         bloc.state.copyWith(
-          isAddedToWatchlist: false,
-          watchlistMessage: 'Failed',
+          isAddedToWatchListorNot: false,
+          allWatchedListMessage: 'Failed',
         ),
       ],
     );

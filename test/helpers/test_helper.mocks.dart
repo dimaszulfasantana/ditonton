@@ -64,76 +64,79 @@ class MockMovieRepository extends _i1.Mock implements _i7.MovieRepository {
   }
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>
-      fetchNowPlayingAllMovie() =>
-          (super.noSuchMethod(Invocation.method(#fetchNowPlayingAllMovie, []),
-                  returnValue:
-                      Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>.value(
-                          _FakeEither_0<_i9.Failure, List<_i10.Movie>>()))
-              as _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>);
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>
+      fetchNowPlayingAllMovie() => (super.noSuchMethod(
+              Invocation.method(#fetchNowPlayingAllMovie, []),
+              returnValue: Future<
+                      _i2.Either<_i9.FailureException, List<_i10.Movie>>>.value(
+                  _FakeEither_0<_i9.FailureException, List<_i10.Movie>>()))
+          as _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>
-      fetchPopularAllMovie() =>
-          (super.noSuchMethod(Invocation.method(#fetchPopularAllMovie, []),
-                  returnValue:
-                      Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>.value(
-                          _FakeEither_0<_i9.Failure, List<_i10.Movie>>()))
-              as _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>);
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>
+      fetchPopularAllMovie() => (super.noSuchMethod(
+              Invocation.method(#fetchPopularAllMovie, []),
+              returnValue: Future<
+                      _i2.Either<_i9.FailureException, List<_i10.Movie>>>.value(
+                  _FakeEither_0<_i9.FailureException, List<_i10.Movie>>()))
+          as _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>
-      fetchTopRatedAllMovie() =>
-          (super.noSuchMethod(Invocation.method(#fetchTopRatedAllMovie, []),
-                  returnValue:
-                      Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>.value(
-                          _FakeEither_0<_i9.Failure, List<_i10.Movie>>()))
-              as _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>);
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>
+      fetchTopRatedAllMovie() => (super.noSuchMethod(
+              Invocation.method(#fetchTopRatedAllMovie, []),
+              returnValue: Future<
+                      _i2.Either<_i9.FailureException, List<_i10.Movie>>>.value(
+                  _FakeEither_0<_i9.FailureException, List<_i10.Movie>>()))
+          as _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i11.MovieDetail>> fetchMovieDataDetail(
-          int? id) =>
-      (super.noSuchMethod(Invocation.method(#fetchMovieDataDetail, [id]),
-          returnValue: Future<_i2.Either<_i9.Failure, _i11.MovieDetail>>.value(
-              _FakeEither_0<_i9.Failure, _i11.MovieDetail>())) as _i8
-          .Future<_i2.Either<_i9.Failure, _i11.MovieDetail>>);
+  _i8.Future<_i2.Either<_i9.FailureException, _i11.MovieDetail>>
+      fetchMovieDataDetail(int? id) => (super.noSuchMethod(
+              Invocation.method(#fetchMovieDataDetail, [id]),
+              returnValue: Future<
+                      _i2.Either<_i9.FailureException, _i11.MovieDetail>>.value(
+                  _FakeEither_0<_i9.FailureException, _i11.MovieDetail>()))
+          as _i8.Future<_i2.Either<_i9.FailureException, _i11.MovieDetail>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>
       fetchMovieDataRecommendations(int? id) => (super.noSuchMethod(
-          Invocation.method(#fetchMovieDataRecommendations, [id]),
-          returnValue: Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>.value(
-              _FakeEither_0<_i9.Failure, List<_i10.Movie>>())) as _i8
-          .Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>);
+              Invocation.method(#fetchMovieDataRecommendations, [id]),
+              returnValue: Future<
+                      _i2.Either<_i9.FailureException, List<_i10.Movie>>>.value(
+                  _FakeEither_0<_i9.FailureException, List<_i10.Movie>>()))
+          as _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>> findAllMovies(
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>> findAllMovies(
           String? query) =>
       (super.noSuchMethod(Invocation.method(#findAllMovies, [query]),
-          returnValue: Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>.value(
-              _FakeEither_0<_i9.Failure, List<_i10.Movie>>())) as _i8
-          .Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>);
+              returnValue: Future<
+                      _i2.Either<_i9.FailureException, List<_i10.Movie>>>.value(
+                  _FakeEither_0<_i9.FailureException, List<_i10.Movie>>()))
+          as _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, String>> saveWatchlist(
+  _i8.Future<_i2.Either<_i9.FailureException, String>> saveWatchlist(
           _i11.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#saveWatchlist, [movie]),
-              returnValue: Future<_i2.Either<_i9.Failure, String>>.value(
-                  _FakeEither_0<_i9.Failure, String>()))
-          as _i8.Future<_i2.Either<_i9.Failure, String>>);
+          returnValue: Future<_i2.Either<_i9.FailureException, String>>.value(
+              _FakeEither_0<_i9.FailureException, String>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, String>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, String>> deleteFromWatchList(
+  _i8.Future<_i2.Either<_i9.FailureException, String>> deleteFromWatchList(
           _i11.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#deleteFromWatchList, [movie]),
-              returnValue: Future<_i2.Either<_i9.Failure, String>>.value(
-                  _FakeEither_0<_i9.Failure, String>()))
-          as _i8.Future<_i2.Either<_i9.Failure, String>>);
+          returnValue: Future<_i2.Either<_i9.FailureException, String>>.value(
+              _FakeEither_0<_i9.FailureException, String>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, String>>);
   @override
-  _i8.Future<bool> isAddedToWatchlist(int? id) =>
-      (super.noSuchMethod(Invocation.method(#isAddedToWatchlist, [id]),
+  _i8.Future<bool> isAddedToWatchListorNot(int? id) =>
+      (super.noSuchMethod(Invocation.method(#isAddedToWatchListorNot, [id]),
           returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>
-      fetchWatchListAllMovie() =>
-          (super.noSuchMethod(Invocation.method(#fetchWatchListAllMovie, []),
-                  returnValue:
-                      Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>.value(
-                          _FakeEither_0<_i9.Failure, List<_i10.Movie>>()))
-              as _i8.Future<_i2.Either<_i9.Failure, List<_i10.Movie>>>);
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>
+      getAllWatchListMovie() => (super.noSuchMethod(
+              Invocation.method(#getAllWatchListMovie, []),
+              returnValue: Future<
+                      _i2.Either<_i9.FailureException, List<_i10.Movie>>>.value(
+                  _FakeEither_0<_i9.FailureException, List<_i10.Movie>>()))
+          as _i8.Future<_i2.Either<_i9.FailureException, List<_i10.Movie>>>);
 }
 
 /// A class which mocks [MovieRemoteDataSource].
@@ -207,8 +210,8 @@ class MockMovieLocalDataSource extends _i1.Mock
               returnValue: Future<_i15.MovieTable?>.value())
           as _i8.Future<_i15.MovieTable?>);
   @override
-  _i8.Future<List<_i15.MovieTable>> fetchWatchListAllMovie() =>
-      (super.noSuchMethod(Invocation.method(#fetchWatchListAllMovie, []),
+  _i8.Future<List<_i15.MovieTable>> getAllWatchListMovie() =>
+      (super.noSuchMethod(Invocation.method(#getAllWatchListMovie, []),
               returnValue:
                   Future<List<_i15.MovieTable>>.value(<_i15.MovieTable>[]))
           as _i8.Future<List<_i15.MovieTable>>);
@@ -254,8 +257,8 @@ class MockDatabaseHelper extends _i1.Mock implements _i16.DatabaseHelper {
               returnValue: Future<Map<String, dynamic>?>.value())
           as _i8.Future<Map<String, dynamic>?>);
   @override
-  _i8.Future<List<Map<String, dynamic>>> fetchWatchListAllMovie() =>
-      (super.noSuchMethod(Invocation.method(#fetchWatchListAllMovie, []),
+  _i8.Future<List<Map<String, dynamic>>> getAllWatchListMovie() =>
+      (super.noSuchMethod(Invocation.method(#getAllWatchListMovie, []),
               returnValue: Future<List<Map<String, dynamic>>>.value(
                   <Map<String, dynamic>>[]))
           as _i8.Future<List<Map<String, dynamic>>>);
@@ -277,79 +280,79 @@ class MockTvSeriesRepository extends _i1.Mock
   }
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>
       fetchNowPlayingTvSeriesData() => (super.noSuchMethod(
-              Invocation.method(#fetchNowPlayingTvSeriesData, []),
-              returnValue:
-                  Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>.value(
-                      _FakeEither_0<_i9.Failure, List<_i20.TvSeries>>()))
-          as _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>);
+          Invocation.method(#fetchNowPlayingTvSeriesData, []),
+          returnValue: Future<
+                  _i2.Either<_i9.FailureException, List<_i20.TvSeries>>>.value(
+              _FakeEither_0<_i9.FailureException, List<_i20.TvSeries>>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>
       fetchPopularTvSeriesData() => (super.noSuchMethod(
-              Invocation.method(#fetchPopularTvSeriesData, []),
-              returnValue:
-                  Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>.value(
-                      _FakeEither_0<_i9.Failure, List<_i20.TvSeries>>()))
-          as _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>);
+          Invocation.method(#fetchPopularTvSeriesData, []),
+          returnValue: Future<
+                  _i2.Either<_i9.FailureException, List<_i20.TvSeries>>>.value(
+              _FakeEither_0<_i9.FailureException, List<_i20.TvSeries>>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>
       fetchTopRatedTvSeriesData() => (super.noSuchMethod(
-              Invocation.method(#fetchTopRatedTvSeriesData, []),
-              returnValue:
-                  Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>.value(
-                      _FakeEither_0<_i9.Failure, List<_i20.TvSeries>>()))
-          as _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>);
+          Invocation.method(#fetchTopRatedTvSeriesData, []),
+          returnValue: Future<
+                  _i2.Either<_i9.FailureException, List<_i20.TvSeries>>>.value(
+              _FakeEither_0<_i9.FailureException, List<_i20.TvSeries>>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i21.TvDetails>> fetchTvSeriesDataDetails(
-          int? seriesId) =>
-      (super.noSuchMethod(
+  _i8.Future<_i2.Either<_i9.FailureException, _i21.TvDetails>>
+      fetchTvSeriesDataDetails(int? seriesId) => (super.noSuchMethod(
           Invocation.method(#fetchTvSeriesDataDetails, [seriesId]),
-          returnValue: Future<_i2.Either<_i9.Failure, _i21.TvDetails>>.value(
-              _FakeEither_0<_i9.Failure, _i21.TvDetails>())) as _i8
-          .Future<_i2.Either<_i9.Failure, _i21.TvDetails>>);
+          returnValue:
+              Future<_i2.Either<_i9.FailureException, _i21.TvDetails>>.value(
+                  _FakeEither_0<_i9.FailureException, _i21.TvDetails>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, _i21.TvDetails>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>
       fetchSearchTvSeriesData(String? query) => (super.noSuchMethod(
-              Invocation.method(#fetchSearchTvSeriesData, [query]),
-              returnValue:
-                  Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>.value(
-                      _FakeEither_0<_i9.Failure, List<_i20.TvSeries>>()))
-          as _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>);
+          Invocation.method(#fetchSearchTvSeriesData, [query]),
+          returnValue: Future<
+                  _i2.Either<_i9.FailureException, List<_i20.TvSeries>>>.value(
+              _FakeEither_0<_i9.FailureException, List<_i20.TvSeries>>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>
       fetchTvSeriesRecommendationsData(int? seriesId) => (super.noSuchMethod(
-              Invocation.method(#fetchTvSeriesRecommendationsData, [seriesId]),
-              returnValue:
-                  Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>.value(
-                      _FakeEither_0<_i9.Failure, List<_i20.TvSeries>>()))
-          as _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>);
+          Invocation.method(#fetchTvSeriesRecommendationsData, [seriesId]),
+          returnValue: Future<
+                  _i2.Either<_i9.FailureException, List<_i20.TvSeries>>>.value(
+              _FakeEither_0<_i9.FailureException, List<_i20.TvSeries>>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, String>> addToWatchList(
+  _i8.Future<_i2.Either<_i9.FailureException, String>> addToWatchList(
           _i21.TvDetails? tvSeries) =>
       (super.noSuchMethod(Invocation.method(#addToWatchList, [tvSeries]),
-              returnValue: Future<_i2.Either<_i9.Failure, String>>.value(
-                  _FakeEither_0<_i9.Failure, String>()))
-          as _i8.Future<_i2.Either<_i9.Failure, String>>);
+          returnValue: Future<_i2.Either<_i9.FailureException, String>>.value(
+              _FakeEither_0<_i9.FailureException, String>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, String>>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, String>> deleteFromWatchList(
+  _i8.Future<_i2.Either<_i9.FailureException, String>> deleteFromWatchList(
           _i21.TvDetails? tvSeries) =>
       (super.noSuchMethod(Invocation.method(#deleteFromWatchList, [tvSeries]),
-              returnValue: Future<_i2.Either<_i9.Failure, String>>.value(
-                  _FakeEither_0<_i9.Failure, String>()))
-          as _i8.Future<_i2.Either<_i9.Failure, String>>);
+          returnValue: Future<_i2.Either<_i9.FailureException, String>>.value(
+              _FakeEither_0<_i9.FailureException, String>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, String>>);
   @override
-  _i8.Future<bool> isAddedToWatchlist(int? id) =>
-      (super.noSuchMethod(Invocation.method(#isAddedToWatchlist, [id]),
+  _i8.Future<bool> isAddedToWatchListorNot(int? id) =>
+      (super.noSuchMethod(Invocation.method(#isAddedToWatchListorNot, [id]),
           returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
   @override
-  _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>
+  _i8.Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>
       fetchWatchListTvDataSeries() => (super.noSuchMethod(
-              Invocation.method(#fetchWatchListTvDataSeries, []),
-              returnValue:
-                  Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>.value(
-                      _FakeEither_0<_i9.Failure, List<_i20.TvSeries>>()))
-          as _i8.Future<_i2.Either<_i9.Failure, List<_i20.TvSeries>>>);
+          Invocation.method(#fetchWatchListTvDataSeries, []),
+          returnValue: Future<
+                  _i2.Either<_i9.FailureException, List<_i20.TvSeries>>>.value(
+              _FakeEither_0<_i9.FailureException, List<_i20.TvSeries>>())) as _i8
+          .Future<_i2.Either<_i9.FailureException, List<_i20.TvSeries>>>);
 }
 
 /// A class which mocks [TvSeriesRemoteDataSource].

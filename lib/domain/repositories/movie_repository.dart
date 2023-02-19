@@ -4,14 +4,16 @@ import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/common/failure.dart';
 
 abstract class MovieRepository {
-  Future<Either<Failure, List<Movie>>> fetchNowPlayingAllMovie();
-  Future<Either<Failure, List<Movie>>> fetchPopularAllMovie();
-  Future<Either<Failure, List<Movie>>> fetchTopRatedAllMovie();
-  Future<Either<Failure, MovieDetail>> fetchMovieDataDetail(int id);
-  Future<Either<Failure, List<Movie>>> fetchMovieDataRecommendations(int id);
-  Future<Either<Failure, List<Movie>>> findAllMovies(String query);
-  Future<Either<Failure, String>> saveWatchlist(MovieDetail movie);
-  Future<Either<Failure, String>> deleteFromWatchList(MovieDetail movie);
-  Future<bool> isAddedToWatchlist(int id);
-  Future<Either<Failure, List<Movie>>> fetchWatchListAllMovie();
+  Future<Either<FailureException, List<Movie>>> fetchNowPlayingAllMovie();
+  Future<Either<FailureException, List<Movie>>> fetchPopularAllMovie();
+  Future<Either<FailureException, List<Movie>>> fetchTopRatedAllMovie();
+  Future<Either<FailureException, MovieDetail>> fetchMovieDataDetail(int id);
+  Future<Either<FailureException, List<Movie>>> fetchMovieDataRecommendations(
+      int id);
+  Future<Either<FailureException, List<Movie>>> findAllMovies(String query);
+  Future<Either<FailureException, String>> saveWatchlist(MovieDetail movie);
+  Future<Either<FailureException, String>> deleteFromWatchList(
+      MovieDetail movie);
+  Future<bool> isAddedToWatchListorNot(int id);
+  Future<Either<FailureException, List<Movie>>> getAllWatchListMovie();
 }

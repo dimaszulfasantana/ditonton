@@ -19,130 +19,147 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
   });
 
   @override
-  Future<Either<Failure, List<TvSeries>>> fetchNowPlayingTvSeriesData() async {
+  Future<Either<FailureException, List<TvSeries>>>
+      fetchNowPlayingTvSeriesData() async {
     try {
       final result =
           await tvSeriesRemoteDataSource.fetchNowPlayingTvSeriesData();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
+    } on ErrorServerFoundException {
+      return Left(FailureServerException(''));
     } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(
+          FailureConnectionException('Failed to connect to the network'));
     } on TlsException catch (e) {
-      return Left(ServerFailure('Certification not valid ${e.toString()}'));
+      return Left(
+          FailureServerException('Certification not valid ${e.toString()}'));
     }
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> fetchPopularTvSeriesData() async {
+  Future<Either<FailureException, List<TvSeries>>>
+      fetchPopularTvSeriesData() async {
     try {
       final result = await tvSeriesRemoteDataSource.fetchPopularTvSeriesData();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
+    } on ErrorServerFoundException {
+      return Left(FailureServerException(''));
     } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(
+          FailureConnectionException('Failed to connect to the network'));
     } on TlsException catch (e) {
-      return Left(ServerFailure('Certification not valid ${e.toString()}'));
+      return Left(
+          FailureServerException('Certification not valid ${e.toString()}'));
     }
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> fetchSearchTvSeriesData(
+  Future<Either<FailureException, List<TvSeries>>> fetchSearchTvSeriesData(
       String query) async {
     try {
       final result =
           await tvSeriesRemoteDataSource.fetchSearchTvSeriesData(query);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
+    } on ErrorServerFoundException {
+      return Left(FailureServerException(''));
     } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(
+          FailureConnectionException('Failed to connect to the network'));
     } on TlsException catch (e) {
-      return Left(ServerFailure('Certification not valid ${e.toString()}'));
+      return Left(
+          FailureServerException('Certification not valid ${e.toString()}'));
     }
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> fetchTopRatedTvSeriesData() async {
+  Future<Either<FailureException, List<TvSeries>>>
+      fetchTopRatedTvSeriesData() async {
     try {
       final result = await tvSeriesRemoteDataSource.fetchTopRatedTvSeriesData();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
+    } on ErrorServerFoundException {
+      return Left(FailureServerException(''));
     } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(
+          FailureConnectionException('Failed to connect to the network'));
     } on TlsException catch (e) {
-      return Left(ServerFailure('Certification not valid ${e.toString()}'));
+      return Left(
+          FailureServerException('Certification not valid ${e.toString()}'));
     }
   }
 
   @override
-  Future<Either<Failure, TvDetails>> fetchTvSeriesDataDetails(
+  Future<Either<FailureException, TvDetails>> fetchTvSeriesDataDetails(
       int seriesId) async {
     try {
       final result =
           await tvSeriesRemoteDataSource.fetchTvSeriesDataDetails(seriesId);
       return Right(result.toEntity());
-    } on ServerException {
-      return Left(ServerFailure(''));
+    } on ErrorServerFoundException {
+      return Left(FailureServerException(''));
     } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(
+          FailureConnectionException('Failed to connect to the network'));
     } on TlsException catch (e) {
-      return Left(ServerFailure('Certification not valid ${e.toString()}'));
+      return Left(
+          FailureServerException('Certification not valid ${e.toString()}'));
     }
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> fetchTvSeriesRecommendationsData(
-      int seriesId) async {
+  Future<Either<FailureException, List<TvSeries>>>
+      fetchTvSeriesRecommendationsData(int seriesId) async {
     try {
       final result = await tvSeriesRemoteDataSource
           .fetchTvSeriesRecommendationsData(seriesId);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
+    } on ErrorServerFoundException {
+      return Left(FailureServerException(''));
     } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(
+          FailureConnectionException('Failed to connect to the network'));
     } on TlsException catch (e) {
-      return Left(ServerFailure('Certification not valid ${e.toString()}'));
+      return Left(
+          FailureServerException('Certification not valid ${e.toString()}'));
     }
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> fetchWatchListTvDataSeries() async {
+  Future<Either<FailureException, List<TvSeries>>>
+      fetchWatchListTvDataSeries() async {
     final result = await tvSeriesLocalDataSource.fetchWatchListTvDataSeries();
     return Right(result.map((data) => data.toEntity()).toList());
   }
 
   @override
-  Future<Either<Failure, String>> addToWatchList(TvDetails tvSeries) async {
+  Future<Either<FailureException, String>> addToWatchList(
+      TvDetails tvSeries) async {
     try {
       final result = await tvSeriesLocalDataSource
           .addToWatchList(TvSeriesTable.fromEntity(tvSeries));
       return Right(result);
-    } on DatabaseException catch (e) {
-      return left(DatabaseFailure(e.message));
+    } on ErrorDatabaseFoundException catch (e) {
+      return left(FailureDatabaseException(e.message));
     } catch (e) {
       throw e;
     }
   }
 
   @override
-  Future<bool> isAddedToWatchlist(int id) async {
+  Future<bool> isAddedToWatchListorNot(int id) async {
     final result = await tvSeriesLocalDataSource.fetchTvSeriesDataById(id);
     return result != null;
   }
 
   @override
-  Future<Either<Failure, String>> deleteFromWatchList(
+  Future<Either<FailureException, String>> deleteFromWatchList(
       TvDetails tvSeries) async {
     try {
       final result = await tvSeriesLocalDataSource
           .deleteFromWatchList(TvSeriesTable.fromEntity(tvSeries));
       return Right(result);
-    } on DatabaseException catch (e) {
-      return Left(DatabaseFailure(e.message));
+    } on ErrorDatabaseFoundException catch (e) {
+      return Left(FailureDatabaseException(e.message));
     }
   }
 }

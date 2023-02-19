@@ -56,14 +56,14 @@ void main() {
       voteAverage: 1,
       voteCount: 1);
 
-  final tvSeriesList = <TvSeries>[tvSeries];
+  final allTvSeriesList = <TvSeries>[tvSeries];
 
   group('Now Playing Tv Series', () {
     blocTest<TvSeriesListCubit, TvSeriesListState>(
       'should return data from usecase',
       build: () {
         when(mockGetNowPlayingTvSeries.execute())
-            .thenAnswer((_) async => Right(tvSeriesList));
+            .thenAnswer((_) async => Right(allTvSeriesList));
         return bloc;
       },
       act: (cubit) => cubit.fetchNowPlayingTvSeries(),
@@ -76,18 +76,18 @@ void main() {
         'should change state to loading then loaded when function called',
         build: () {
           when(mockGetNowPlayingTvSeries.execute())
-              .thenAnswer((_) async => Right(tvSeriesList));
+              .thenAnswer((_) async => Right(allTvSeriesList));
           return bloc;
         },
         act: (cubit) => cubit.fetchNowPlayingTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loading,
-                nowPlayingList: [],
+                stateNowPlaying: RequestState.Loading,
+                allNowPlayingList: [],
               ),
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loaded,
-                nowPlayingList: tvSeriesList,
+                stateNowPlaying: RequestState.Loaded,
+                allNowPlayingList: allTvSeriesList,
               )
             ]);
 
@@ -95,17 +95,17 @@ void main() {
         'should return failure and error state when fetch now playing failed',
         build: () {
           when(mockGetNowPlayingTvSeries.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchNowPlayingTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Loading,
+                stateNowPlaying: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                nowPlayingState: RequestState.Error,
+                stateNowPlaying: RequestState.Error,
                 message: 'Failed',
               )
             ]);
@@ -116,7 +116,7 @@ void main() {
       'should return data from usecase',
       build: () {
         when(mockGetPopularTvSeries.execute())
-            .thenAnswer((_) async => Right(tvSeriesList));
+            .thenAnswer((_) async => Right(allTvSeriesList));
         return bloc;
       },
       act: (cubit) => cubit.fetchPopularTvSeries(),
@@ -129,18 +129,18 @@ void main() {
         'should change state to loading then loaded when function called',
         build: () {
           when(mockGetPopularTvSeries.execute())
-              .thenAnswer((_) async => Right(tvSeriesList));
+              .thenAnswer((_) async => Right(allTvSeriesList));
           return bloc;
         },
         act: (cubit) => cubit.fetchPopularTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                popularState: RequestState.Loading,
-                popularList: [],
+                statePopularTvSeries: RequestState.Loading,
+                allPopularList: [],
               ),
               bloc.state.copyWith(
-                popularState: RequestState.Loaded,
-                popularList: tvSeriesList,
+                statePopularTvSeries: RequestState.Loaded,
+                allPopularList: allTvSeriesList,
               )
             ]);
 
@@ -148,17 +148,17 @@ void main() {
         'should return failure and error state when fetch now playing failed',
         build: () {
           when(mockGetPopularTvSeries.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchPopularTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                popularState: RequestState.Loading,
+                statePopularTvSeries: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                popularState: RequestState.Error,
+                statePopularTvSeries: RequestState.Error,
                 message: 'Failed',
               )
             ]);
@@ -169,7 +169,7 @@ void main() {
       'should return data from usecase',
       build: () {
         when(mockGetTopRatedTvSeries.execute())
-            .thenAnswer((_) async => Right(tvSeriesList));
+            .thenAnswer((_) async => Right(allTvSeriesList));
         return bloc;
       },
       act: (cubit) => cubit.fetchTopRatedTvSeries(),
@@ -182,18 +182,18 @@ void main() {
         'should change state to loading then loaded when function called',
         build: () {
           when(mockGetTopRatedTvSeries.execute())
-              .thenAnswer((_) async => Right(tvSeriesList));
+              .thenAnswer((_) async => Right(allTvSeriesList));
           return bloc;
         },
         act: (cubit) => cubit.fetchTopRatedTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                topRatedState: RequestState.Loading,
-                topRatedList: [],
+                stateTopRatedTvSeries: RequestState.Loading,
+                allTopRatedList: [],
               ),
               bloc.state.copyWith(
-                topRatedState: RequestState.Loaded,
-                topRatedList: tvSeriesList,
+                stateTopRatedTvSeries: RequestState.Loaded,
+                allTopRatedList: allTvSeriesList,
               )
             ]);
 
@@ -201,17 +201,17 @@ void main() {
         'should return failure and error state when fetch now playing failed',
         build: () {
           when(mockGetTopRatedTvSeries.execute())
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchTopRatedTvSeries(),
         expect: () => [
               bloc.state.copyWith(
-                topRatedState: RequestState.Loading,
+                stateTopRatedTvSeries: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                topRatedState: RequestState.Error,
+                stateTopRatedTvSeries: RequestState.Error,
                 message: 'Failed',
               )
             ]);

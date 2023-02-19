@@ -67,7 +67,7 @@ void main() {
       voteAverage: 1,
       voteCount: 1);
 
-  final tvSeriesList = <TvSeries>[tvSeries];
+  final allTvSeriesList = <TvSeries>[tvSeries];
 
   final emptyDetail = TvDetails(
     adult: false,
@@ -101,7 +101,7 @@ void main() {
     when(mockGetTvSeriesDetail.execute(id))
         .thenAnswer((_) async => Right(testTvSeriesDetail));
     when(mockGetTvSeriesRecommendations.execute(id))
-        .thenAnswer((_) async => Right(tvSeriesList));
+        .thenAnswer((_) async => Right(allTvSeriesList));
   }
 
   group('Get Tv Series Detail', () {
@@ -127,22 +127,22 @@ void main() {
       act: (cubit) => cubit.fetchTvSeriesDetail(id),
       expect: () => [
         bloc.state.copyWith(
-          tvSeriesDetailState: RequestState.Loading,
-          recommendationsState: RequestState.Empty,
-          tvSeriesDetail: emptyDetail,
-          tvSeriesRecommendations: [],
+          stateAllTvSeriesDetail: RequestState.Loading,
+          stateAllRecommendationTvSeries: RequestState.Empty,
+          allTvSeriesDetail: emptyDetail,
+          allTvSeriesRecommendations: [],
         ),
         bloc.state.copyWith(
-          recommendationsState: RequestState.Loading,
-          tvSeriesDetailState: RequestState.Loaded,
-          tvSeriesDetail: testTvSeriesDetail,
-          tvSeriesRecommendations: [],
+          stateAllRecommendationTvSeries: RequestState.Loading,
+          stateAllTvSeriesDetail: RequestState.Loaded,
+          allTvSeriesDetail: testTvSeriesDetail,
+          allTvSeriesRecommendations: [],
         ),
         bloc.state.copyWith(
-          recommendationsState: RequestState.Loaded,
-          tvSeriesDetailState: RequestState.Loaded,
-          tvSeriesDetail: testTvSeriesDetail,
-          tvSeriesRecommendations: tvSeriesList,
+          stateAllRecommendationTvSeries: RequestState.Loaded,
+          stateAllTvSeriesDetail: RequestState.Loaded,
+          allTvSeriesDetail: testTvSeriesDetail,
+          allTvSeriesRecommendations: allTvSeriesList,
         ),
       ],
     );
@@ -151,19 +151,19 @@ void main() {
         'should return error when get detail or recommendation tv series failed',
         build: () {
           when(mockGetTvSeriesDetail.execute(id))
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           when(mockGetTvSeriesRecommendations.execute(id))
-              .thenAnswer((_) async => Left(ServerFailure('Failed')));
+              .thenAnswer((_) async => Left(FailureServerException('Failed')));
           return bloc;
         },
         act: (cubit) => cubit.fetchTvSeriesDetail(id),
         expect: () => [
               bloc.state.copyWith(
-                tvSeriesDetailState: RequestState.Loading,
+                stateAllTvSeriesDetail: RequestState.Loading,
                 message: '',
               ),
               bloc.state.copyWith(
-                tvSeriesDetailState: RequestState.Error,
+                stateAllTvSeriesDetail: RequestState.Error,
                 message: 'Failed',
               ),
             ]);
@@ -178,7 +178,7 @@ void main() {
         return bloc;
       },
       act: (cubit) => cubit.loadWatchlistStatus(id),
-      expect: () => [bloc.state.copyWith(isAddedToWatchlist: true)],
+      expect: () => [bloc.state.copyWith(isAddedToWatchListorNot: true)],
     );
 
     blocTest<TvSeriesDetailCubit, TvSeriesDetailState>(
@@ -222,12 +222,12 @@ void main() {
           mockGetTvSeriesWatchlistStatus.execute(testTvSeriesDetail.id),
       expect: () => [
         bloc.state.copyWith(
-          isAddedToWatchlist: false,
-          watchlistMessage: 'Added to Watchlist',
+          isAddedToWatchListorNot: false,
+          allWatchedListMessage: 'Added to Watchlist',
         ),
         bloc.state.copyWith(
-          isAddedToWatchlist: true,
-          watchlistMessage: 'Added to Watchlist',
+          isAddedToWatchListorNot: true,
+          allWatchedListMessage: 'Added to Watchlist',
         )
       ],
     );
@@ -236,7 +236,7 @@ void main() {
       'should update watchlist status when add watchlist failed',
       build: () {
         when(mockSaveTvSeriesWatchlist.execute(testTvSeriesDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+            .thenAnswer((_) async => Left(FailureDatabaseException('Failed')));
         when(mockGetTvSeriesWatchlistStatus.execute(testTvSeriesDetail.id))
             .thenAnswer((_) async => false);
         return bloc;
@@ -246,8 +246,8 @@ void main() {
           mockGetTvSeriesWatchlistStatus.execute(testTvSeriesDetail.id),
       expect: () => [
         bloc.state.copyWith(
-          isAddedToWatchlist: false,
-          watchlistMessage: 'Failed',
+          isAddedToWatchListorNot: false,
+          allWatchedListMessage: 'Failed',
         ),
       ],
     );

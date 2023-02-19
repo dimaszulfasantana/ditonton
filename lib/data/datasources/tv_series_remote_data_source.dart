@@ -32,7 +32,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).results;
     } else {
-      throw ServerException();
+      throw ErrorServerFoundException();
     }
   }
 
@@ -44,7 +44,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).results;
     } else {
-      throw ServerException();
+      throw ErrorServerFoundException();
     }
   }
 
@@ -56,7 +56,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).results;
     } else {
-      throw ServerException();
+      throw ErrorServerFoundException();
     }
   }
 
@@ -68,7 +68,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).results;
     } else {
-      throw ServerException();
+      throw ErrorServerFoundException();
     }
   }
 
@@ -80,7 +80,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesDetails.fromJson(json.decode(response.body));
     } else {
-      throw ServerException();
+      throw ErrorServerFoundException();
     }
   }
 
@@ -93,7 +93,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).results;
     } else {
-      throw ServerException();
+      throw ErrorServerFoundException();
     }
   }
 }

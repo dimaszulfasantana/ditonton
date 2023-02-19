@@ -3,47 +3,48 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieListState extends Equatable {
-  final RequestState nowPlayingState;
-  final RequestState popularState;
-  final RequestState topRatedState;
-  final List<Movie> nowPlayingList;
-  final List<Movie> popularList;
-  final List<Movie> topRatedList;
+  final RequestState stateNowPlaying;
+  final RequestState statePopularTvSeries;
+  final RequestState stateTopRatedTvSeries;
+  final List<Movie> allNowPlayingList;
+  final List<Movie> allPopularList;
+  final List<Movie> allTopRatedList;
 
   const MovieListState({
-    required this.nowPlayingState,
-    required this.popularState,
-    required this.topRatedState,
-    required this.nowPlayingList,
-    required this.popularList,
-    required this.topRatedList,
+    required this.stateNowPlaying,
+    required this.statePopularTvSeries,
+    required this.stateTopRatedTvSeries,
+    required this.allNowPlayingList,
+    required this.allPopularList,
+    required this.allTopRatedList,
   });
 
   MovieListState copyWith({
-    RequestState? nowPlayingState,
-    RequestState? popularState,
-    RequestState? topRatedState,
-    List<Movie>? nowPlayingList,
-    List<Movie>? popularList,
-    List<Movie>? topRatedList,
+    RequestState? stateNowPlaying,
+    RequestState? statePopularTvSeries,
+    RequestState? stateTopRatedTvSeries,
+    List<Movie>? allNowPlayingList,
+    List<Movie>? allPopularList,
+    List<Movie>? allTopRatedList,
   }) {
     return MovieListState(
-      nowPlayingState: nowPlayingState ?? this.nowPlayingState,
-      popularState: popularState ?? this.popularState,
-      topRatedState: topRatedState ?? this.topRatedState,
-      nowPlayingList: nowPlayingList ?? this.nowPlayingList,
-      popularList: popularList ?? this.popularList,
-      topRatedList: topRatedList ?? this.topRatedList,
+      stateNowPlaying: stateNowPlaying ?? this.stateNowPlaying,
+      statePopularTvSeries: statePopularTvSeries ?? this.statePopularTvSeries,
+      stateTopRatedTvSeries:
+          stateTopRatedTvSeries ?? this.stateTopRatedTvSeries,
+      allNowPlayingList: allNowPlayingList ?? this.allNowPlayingList,
+      allPopularList: allPopularList ?? this.allPopularList,
+      allTopRatedList: allTopRatedList ?? this.allTopRatedList,
     );
   }
 
   @override
   List<Object?> get props => [
-        nowPlayingState,
-        popularState,
-        topRatedState,
-        nowPlayingList,
-        popularList,
-        topRatedList,
+        stateNowPlaying,
+        statePopularTvSeries,
+        stateTopRatedTvSeries,
+        allNowPlayingList,
+        allPopularList,
+        allTopRatedList,
       ];
 }

@@ -33,19 +33,19 @@ void main() {
       (WidgetTester tester) async {
     when(mockBloc.stream).thenAnswer((_) => Stream.value(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: '',
-        isAddedToWatchlist: false,
+        allWatchedListMessage: '',
+        isAddedToWatchListorNot: false,
         message: '')));
     when(mockBloc.state).thenReturn(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: '',
-        isAddedToWatchlist: false,
+        allWatchedListMessage: '',
+        isAddedToWatchListorNot: false,
         message: ''));
 
     final watchlistButtonIcon = find.byIcon(Icons.add);
@@ -60,19 +60,19 @@ void main() {
       (WidgetTester tester) async {
     when(mockBloc.stream).thenAnswer((_) => Stream.value(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: 'Added to Watchlist',
-        isAddedToWatchlist: true,
+        allWatchedListMessage: 'Added to Watchlist',
+        isAddedToWatchListorNot: true,
         message: '')));
     when(mockBloc.state).thenReturn(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: 'Added to Watchlist',
-        isAddedToWatchlist: true,
+        allWatchedListMessage: 'Added to Watchlist',
+        isAddedToWatchListorNot: true,
         message: ''));
 
     final watchlistButtonIcon = find.byIcon(Icons.check);
@@ -87,19 +87,19 @@ void main() {
       (WidgetTester tester) async {
     when(mockBloc.stream).thenAnswer((_) => Stream.value(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: 'Added to Watchlist',
-        isAddedToWatchlist: false,
+        allWatchedListMessage: 'Added to Watchlist',
+        isAddedToWatchListorNot: false,
         message: '')));
     when(mockBloc.state).thenReturn(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: 'Added to Watchlist',
-        isAddedToWatchlist: false,
+        allWatchedListMessage: 'Added to Watchlist',
+        isAddedToWatchListorNot: false,
         message: ''));
 
     final watchlistButton = find.byType(ElevatedButton);
@@ -120,19 +120,19 @@ void main() {
       (WidgetTester tester) async {
     when(mockBloc.stream).thenAnswer((_) => Stream.value(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: 'Failed',
-        isAddedToWatchlist: false,
+        allWatchedListMessage: 'Failed',
+        isAddedToWatchListorNot: false,
         message: '')));
     when(mockBloc.state).thenReturn(MovieDetailState(
         movieDetailState: RequestState.Loaded,
-        recommendationsState: RequestState.Loaded,
+        stateAllRecommendationTvSeries: RequestState.Loaded,
         movieDetail: testMovieDetail,
         movieRecommendations: <Movie>[],
-        watchlistMessage: 'Failed',
-        isAddedToWatchlist: false,
+        allWatchedListMessage: 'Failed',
+        isAddedToWatchListorNot: false,
         message: ''));
 
     final watchlistButton = find.byType(ElevatedButton);

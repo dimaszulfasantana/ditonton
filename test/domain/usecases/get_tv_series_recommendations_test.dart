@@ -17,16 +17,16 @@ void main() {
   });
 
   int id = 1;
-  final tvSeriesList = <TvSeries>[];
+  final allTvSeriesList = <TvSeries>[];
 
   test('should return tv series recommendations list from repository',
       () async {
     // arrange
     when(mockTvSeriesRepository.fetchTvSeriesRecommendationsData(id))
-        .thenAnswer((_) async => Right(tvSeriesList));
+        .thenAnswer((_) async => Right(allTvSeriesList));
     // act
     final result = await fetchTvSeriesRecommendationsData.execute(id);
     // assert
-    expect(result, Right(tvSeriesList));
+    expect(result, Right(allTvSeriesList));
   });
 }

@@ -9,7 +9,7 @@ class GetPopularTvSeries {
     required this.tvSeriesRepository,
   });
 
-  Future<Either<Failure, List<TvSeries>>> execute() {
+  Future<Either<FailureException, List<TvSeries>>> execute() {
     return tvSeriesRepository.fetchPopularTvSeriesData();
   }
 }

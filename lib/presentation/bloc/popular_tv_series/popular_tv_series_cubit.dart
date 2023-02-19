@@ -9,17 +9,20 @@ class PopularTvSeriesCubit extends Cubit<PopularTvSeriesState> {
   PopularTvSeriesCubit({
     required this.fetchPopularTvSeriesData,
   }) : super(PopularTvSeriesState(
-            popularState: RequestState.Empty, popularList: [], message: ''));
+            statePopularTvSeries: RequestState.Empty,
+            allPopularList: [],
+            message: ''));
 
   Future<void> fetchPopularTvSeries() async {
-    emit(state.copyWith(popularState: RequestState.Loading, popularList: []));
+    emit(state.copyWith(
+        statePopularTvSeries: RequestState.Loading, allPopularList: []));
     final result = await fetchPopularTvSeriesData.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          popularState: RequestState.Error, message: failure.message));
+          statePopularTvSeries: RequestState.Error, message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          popularState: RequestState.Loaded, popularList: result));
+          statePopularTvSeries: RequestState.Loaded, allPopularList: result));
     });
   }
 }

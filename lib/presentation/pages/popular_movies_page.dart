@@ -31,15 +31,15 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
           builder: (context, state) {
-            if (state.popularMoviesState == RequestState.Loading) {
+            if (state.statePopularAllMoviesData == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state.popularMoviesState == RequestState.Loaded) {
+            } else if (state.statePopularAllMoviesData == RequestState.Loaded) {
               return ListView.builder(
-                  itemCount: state.popularMovies.length,
+                  itemCount: state.allPopularMoviesData.length,
                   itemBuilder: (context, index) {
-                    final movie = state.popularMovies[index];
+                    final movie = state.allPopularMoviesData[index];
                     return MovieCard(movie);
                   });
             } else {

@@ -8,39 +8,42 @@ class MovieDetailState extends Equatable {
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   final RequestState movieDetailState;
-  final RequestState recommendationsState;
+  final RequestState stateAllRecommendationTvSeries;
   final MovieDetail movieDetail;
   final List<Movie> movieRecommendations;
-  final String watchlistMessage;
-  final bool isAddedToWatchlist;
+  final String allWatchedListMessage;
+  final bool isAddedToWatchListorNot;
   final String message;
 
   MovieDetailState({
     required this.movieDetailState,
-    required this.recommendationsState,
+    required this.stateAllRecommendationTvSeries,
     required this.movieDetail,
     required this.movieRecommendations,
-    required this.watchlistMessage,
-    required this.isAddedToWatchlist,
+    required this.allWatchedListMessage,
+    required this.isAddedToWatchListorNot,
     required this.message,
   });
 
   MovieDetailState copyWith({
     RequestState? movieDetailState,
-    RequestState? recommendationsState,
+    RequestState? stateAllRecommendationTvSeries,
     MovieDetail? movieDetail,
     List<Movie>? movieRecommendations,
-    String? watchlistMessage,
-    bool? isAddedToWatchlist,
+    String? allWatchedListMessage,
+    bool? isAddedToWatchListorNot,
     String? message,
   }) {
     return MovieDetailState(
       movieDetailState: movieDetailState ?? this.movieDetailState,
-      recommendationsState: recommendationsState ?? this.recommendationsState,
+      stateAllRecommendationTvSeries:
+          stateAllRecommendationTvSeries ?? this.stateAllRecommendationTvSeries,
       movieDetail: movieDetail ?? this.movieDetail,
       movieRecommendations: movieRecommendations ?? this.movieRecommendations,
-      watchlistMessage: watchlistMessage ?? this.watchlistMessage,
-      isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,
+      allWatchedListMessage:
+          allWatchedListMessage ?? this.allWatchedListMessage,
+      isAddedToWatchListorNot:
+          isAddedToWatchListorNot ?? this.isAddedToWatchListorNot,
       message: message ?? this.message,
     );
   }
@@ -48,11 +51,11 @@ class MovieDetailState extends Equatable {
   @override
   List<Object?> get props => [
         movieDetailState,
-        recommendationsState,
+        stateAllRecommendationTvSeries,
         movieDetail,
         movieRecommendations,
-        watchlistMessage,
-        isAddedToWatchlist,
+        allWatchedListMessage,
+        isAddedToWatchListorNot,
         message,
       ];
 }

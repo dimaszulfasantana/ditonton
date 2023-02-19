@@ -6,7 +6,7 @@ abstract class MovieLocalDataSource {
   Future<String> addToWatchList(MovieTable movie);
   Future<String> deleteFromWatchList(MovieTable movie);
   Future<MovieTable?> fetchMovieDataById(int id);
-  Future<List<MovieTable>> fetchWatchListAllMovie();
+  Future<List<MovieTable>> getAllWatchListMovie();
 }
 
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
@@ -20,7 +20,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
       await databaseHelper.addToWatchList(movie);
       return 'Added to Watchlist';
     } catch (e) {
-      throw DatabaseException(e.toString());
+      throw ErrorDatabaseFoundException(e.toString());
     }
   }
 
@@ -30,7 +30,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
       await databaseHelper.deleteFromWatchList(movie);
       return 'Removed from Watchlist';
     } catch (e) {
-      throw DatabaseException(e.toString());
+      throw ErrorDatabaseFoundException(e.toString());
     }
   }
 
@@ -45,8 +45,8 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   }
 
   @override
-  Future<List<MovieTable>> fetchWatchListAllMovie() async {
-    final result = await databaseHelper.fetchWatchListAllMovie();
+  Future<List<MovieTable>> getAllWatchListMovie() async {
+    final result = await databaseHelper.getAllWatchListMovie();
     return result.map((data) => MovieTable.fromMap(data)).toList();
   }
 }

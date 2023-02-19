@@ -33,13 +33,13 @@ void main() {
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
     when(mockCubit.stream).thenAnswer((_) => Stream.value(TopRatedMoviesState(
-          topRatedMoviesState: RequestState.Loading,
-          topRatedMovies: [],
+          stateTopRatedAllMovies: RequestState.Loading,
+          allTopRatedMovie: [],
           message: '',
         )));
     when(mockCubit.state).thenReturn(TopRatedMoviesState(
-      topRatedMoviesState: RequestState.Loading,
-      topRatedMovies: [],
+      stateTopRatedAllMovies: RequestState.Loading,
+      allTopRatedMovie: [],
       message: '',
     ));
 
@@ -55,13 +55,13 @@ void main() {
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
     when(mockCubit.stream).thenAnswer((_) => Stream.value(TopRatedMoviesState(
-          topRatedMoviesState: RequestState.Loaded,
-          topRatedMovies: [],
+          stateTopRatedAllMovies: RequestState.Loaded,
+          allTopRatedMovie: [],
           message: '',
         )));
     when(mockCubit.state).thenReturn(TopRatedMoviesState(
-      topRatedMoviesState: RequestState.Loaded,
-      topRatedMovies: [],
+      stateTopRatedAllMovies: RequestState.Loaded,
+      allTopRatedMovie: [],
       message: '',
     ));
 
@@ -75,13 +75,13 @@ void main() {
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
     when(mockCubit.stream).thenAnswer((_) => Stream.value(TopRatedMoviesState(
-          topRatedMoviesState: RequestState.Error,
-          topRatedMovies: [],
+          stateTopRatedAllMovies: RequestState.Error,
+          allTopRatedMovie: [],
           message: 'Error message',
         )));
     when(mockCubit.state).thenReturn(TopRatedMoviesState(
-      topRatedMoviesState: RequestState.Error,
-      topRatedMovies: [],
+      stateTopRatedAllMovies: RequestState.Error,
+      allTopRatedMovie: [],
       message: 'Error message',
     ));
 

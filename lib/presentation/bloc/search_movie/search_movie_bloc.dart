@@ -9,8 +9,8 @@ class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
   SearchMovieBloc({
     required this.findAllMovies,
   }) : super(SearchMovieState(
-          searchMovieState: RequestState.Empty,
-          moviesList: [],
+          stateSearchMovieDataState: RequestState.Empty,
+          allMovieList: [],
           message: '',
         )) {
     on<SearchMovieFetchEvent>(_fetchSearchedMovies);
@@ -19,14 +19,16 @@ class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
   Future<void> _fetchSearchedMovies(
       SearchMovieEvent event, Emitter<SearchMovieState> emit) async {
     if (event is SearchMovieFetchEvent) {
-      emit(state.copyWith(searchMovieState: RequestState.Loading));
+      emit(state.copyWith(stateSearchMovieDataState: RequestState.Loading));
       final result = await findAllMovies.execute(event.query);
       result.fold((failure) {
         emit(state.copyWith(
-            searchMovieState: RequestState.Error, message: failure.message));
+            stateSearchMovieDataState: RequestState.Error,
+            message: failure.message));
       }, (result) {
         emit(state.copyWith(
-            searchMovieState: RequestState.Loaded, moviesList: result));
+            stateSearchMovieDataState: RequestState.Loaded,
+            allMovieList: result));
       });
     }
   }

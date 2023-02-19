@@ -86,10 +86,11 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
-          primaryColor: kRichBlack,
-          scaffoldBackgroundColor: kRichBlack,
+          primaryColor: colourNavy,
+          scaffoldBackgroundColor: colourNavy,
           textTheme: kTextTheme,
         ),
+        debugShowCheckedModeBanner: false,
         home: HomeMoviePage(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {

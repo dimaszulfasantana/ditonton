@@ -17,7 +17,7 @@ void main() {
 
   final tId = 1;
 
-  test('should get movie detail from the repository', () async {
+  test('get movie data from repository', () async {
     // arrange
     when(mockMovieRepository.fetchMovieDataDetail(tId))
         .thenAnswer((_) async => Right(testMovieDetail));

@@ -15,48 +15,50 @@ class TvSeriesListCubit extends Cubit<TvSeriesListState> {
     required this.fetchPopularTvSeriesData,
     required this.fetchTopRatedTvSeriesData,
   }) : super(TvSeriesListState(
-            nowPlayingState: RequestState.Empty,
-            popularState: RequestState.Empty,
-            topRatedState: RequestState.Empty,
-            nowPlayingList: [],
-            popularList: [],
-            topRatedList: [],
+            stateNowPlaying: RequestState.Empty,
+            statePopularTvSeries: RequestState.Empty,
+            stateTopRatedTvSeries: RequestState.Empty,
+            allNowPlayingList: [],
+            allPopularList: [],
+            allTopRatedList: [],
             message: ''));
 
   Future<void> fetchNowPlayingTvSeries() async {
-    emit(state
-        .copyWith(nowPlayingState: RequestState.Loading, nowPlayingList: []));
+    emit(state.copyWith(
+        stateNowPlaying: RequestState.Loading, allNowPlayingList: []));
     final result = await fetchNowPlayingTvSeriesData.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          nowPlayingState: RequestState.Error, message: failure.message));
+          stateNowPlaying: RequestState.Error, message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          nowPlayingState: RequestState.Loaded, nowPlayingList: result));
+          stateNowPlaying: RequestState.Loaded, allNowPlayingList: result));
     });
   }
 
   Future<void> fetchPopularTvSeries() async {
-    emit(state.copyWith(popularState: RequestState.Loading, popularList: []));
+    emit(state.copyWith(
+        statePopularTvSeries: RequestState.Loading, allPopularList: []));
     final result = await fetchPopularTvSeriesData.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          popularState: RequestState.Error, message: failure.message));
+          statePopularTvSeries: RequestState.Error, message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          popularState: RequestState.Loaded, popularList: result));
+          statePopularTvSeries: RequestState.Loaded, allPopularList: result));
     });
   }
 
   Future<void> fetchTopRatedTvSeries() async {
-    emit(state.copyWith(topRatedState: RequestState.Loading, topRatedList: []));
+    emit(state.copyWith(
+        stateTopRatedTvSeries: RequestState.Loading, allTopRatedList: []));
     final result = await fetchTopRatedTvSeriesData.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          topRatedState: RequestState.Error, message: failure.message));
+          stateTopRatedTvSeries: RequestState.Error, message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          topRatedState: RequestState.Loaded, topRatedList: result));
+          stateTopRatedTvSeries: RequestState.Loaded, allTopRatedList: result));
     });
   }
 }

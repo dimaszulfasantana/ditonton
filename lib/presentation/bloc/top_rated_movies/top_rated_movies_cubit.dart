@@ -9,21 +9,23 @@ class TopRatedMoviesCubit extends Cubit<TopRatedMoviesState> {
   TopRatedMoviesCubit({
     required this.fetchTopRatedAllMovie,
   }) : super(TopRatedMoviesState(
-          topRatedMoviesState: RequestState.Empty,
-          topRatedMovies: [],
+          stateTopRatedAllMovies: RequestState.Empty,
+          allTopRatedMovie: [],
           message: "",
         ));
 
   Future<void> fetchTopRatedMovies() async {
     emit(state.copyWith(
-        topRatedMoviesState: RequestState.Loading, topRatedMovies: []));
+        stateTopRatedAllMovies: RequestState.Loading, allTopRatedMovie: []));
     final result = await fetchTopRatedAllMovie.execute();
     result.fold((failure) {
       emit(state.copyWith(
-          topRatedMoviesState: RequestState.Error, message: failure.message));
+          stateTopRatedAllMovies: RequestState.Error,
+          message: failure.message));
     }, (result) {
       emit(state.copyWith(
-          topRatedMoviesState: RequestState.Loaded, topRatedMovies: result));
+          stateTopRatedAllMovies: RequestState.Loaded,
+          allTopRatedMovie: result));
     });
   }
 }
